@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-zqFg5/Ql+1R0ZusNTxoz2IS4tLkKW3ivW9dA4+XD7/1e3Ha6zBBYW02xWPe1RkA2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <style>
+        body {
+            /* background-color: #f8f9fa; */
+            background-color: rgba(0, 0, 0, 0.958);
+            color: white;
+        }
+
+        .login-container {
+            margin-top: 100px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $.validator.addMethod("email", function (value, element) {
+                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(value);
+            }, "Please enter a valid email address");
+
+            $.validator.addMethod("password", function (value, element) {
+                var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return regex.test(value);
+            }, "Password must be at least 8 characters and include at least one uppercase letter, one lowercase letter, one number, and one special character");
+
+            $("#loginForm").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    }
+                },
+                messages: {
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please enter your password",
+                        minlength: "Password must be at least 8 characters"
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var name = element.attr('name');
+                    if (name === "email" || name === "password") {
+                        error.addClass('invalid-feedback');
+                        error.appendTo(element.parent());
+                    }
+                },
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container login-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <h2 class="text-center mb-4">Login</h2>
+                <form id="loginForm" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                        <div id="email_err" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <div id="password_err" class="invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div class="mt-3 text-center">
+                    <p>Don't have an account? <a href="singup.html">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
