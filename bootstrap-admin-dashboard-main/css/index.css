@@ -46,9 +46,8 @@ h4 {
 }
 
 .sidebar-item a:hover{
-    background-color: blue;
-    border-bottom-right-radius: 1rem;
-    border-left: 10px solid green;
+    color: green;
+    border-left: 3px solid white;
 }
 
 .main {
