@@ -129,71 +129,6 @@
                     <div class="mb-3">
                         <h4>Add New Stocks</h4>
                     </div>
-                    
-                    <!-- Table Element -->
-                    <div class="card border-0">
-                        <div class="card-header">
-                            <h5 class="card-title">
-                                Current Stocks
-                            </h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                        <th scope="col">Sell</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                     <div class="card border-0">
                         <div class="card-header">
                             <h5 class="card-title">
@@ -201,59 +136,32 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <table class="table table-hover table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                        <th scope="col">Sell</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">5</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="pname" class="form-label">Product Name</label>
+                                    <input type="text" class="form-control" id="pname" name="pname">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="qty" class="form-label">Quantity</label>
+                                    <input type="number" class="form-control" id="qty" name="qty">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" class="form-control" id="price" name="price">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Status</label>
+                                    <select class="form-select" id="category" name="category">
+                                        <option value="iurrent">Current</option>
+                                        <option value="incomming">Incomming</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Upload Image</label>
+                                    <input class="form-control" type="file" id="image" name="image">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
