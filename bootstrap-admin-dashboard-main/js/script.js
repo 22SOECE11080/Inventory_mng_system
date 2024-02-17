@@ -29,3 +29,12 @@ function isLight(){
 if(isLight()){
     toggleRootClass();
 }
+
+function print () {
+    var printDiv = document.getElementById("divPrint");
+    var printWindow = window.open('', '', 'left=0, top=0, width=800, height=500, toolbar=0, scrollbars=0, status=0');
+    printWindow.document.write(printDiv.innerHTML);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+   }

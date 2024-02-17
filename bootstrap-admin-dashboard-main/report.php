@@ -49,16 +49,8 @@
                                                 $ 78.00
                                             </h4>
                                             <p class="mb-2">
-                                                Recent Sell
+                                                Total Stock
                                             </p>
-                                            <div class="mb-0">
-                                                <span class="badge text-success me-2">
-                                                    +9.0%
-                                                </span>
-                                                <span class="text-muted">
-                                                    Since Last Month
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +65,7 @@
                                                 60
                                             </h4>
                                             <p class="mb-2">
-                                                Total Customers
+                                                Total Sell
                                             </p>
                                         </div>
                                     </div>
@@ -86,7 +78,7 @@
                     <div class="card border-0">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Recent Sell
+                                Current Stocks
                             </h5>
                         </div>
                         <div class="card-body">
@@ -144,7 +136,7 @@
                     <div class="card border-0">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Recent Customers
+                                Recent Sell
                             </h5>
                         </div>
                         <div class="card-body">
@@ -197,6 +189,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <a href="#print"><button type="button" class="btn btn-success btn-sm" onclick="print()">Print</button></a>
                     </div>
                 </div>
             </main>
@@ -204,35 +197,7 @@
                 <i class="fa-regular fa-moon"></i>
                 <i class="fa-regular fa-sun"></i>
             </a>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-start">
-                            <p class="mb-0">
-                                <a href="#" class="text-muted">
-                                    <strong>CodzSwod</strong>
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Contact</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">About Us</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Terms</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Booking</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include 'footer.html'; ?>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
