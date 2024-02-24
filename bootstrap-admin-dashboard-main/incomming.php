@@ -24,7 +24,7 @@
                     <div class="card border-0">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Current Stocks
+                                Incomming Stocks
                             </h5>
                         </div>
                         <div class="card-body">
@@ -106,40 +106,31 @@
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
+
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -148,7 +139,7 @@
                     <div class="card border-0">
                         <div class="card-header">
                             <h5 class="card-title">
-                                Current Stocks
+                                Recent Sell
                             </h5>
                         </div>
                         <div class="card-body">
@@ -159,7 +150,6 @@
                                         <th scope="col">Product Name</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Sell</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,40 +158,30 @@
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">4</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                     <tr>
                                         <th scope="row">5</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
                                         <td>@fat</td>
-                                        <th scope="col"><a href=""><button type="button"
-                                                    class="btn btn-success btn-sm">sell</button></a></th>
                                     </tr>
                                 </tbody>
                             </table>
