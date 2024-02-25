@@ -97,10 +97,10 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
                         <div class="mt-3 text-center">
-                            <p>Don't have an account? <a href="singup.html">Sign Up</a></p>
+                            <p>Don't have an account? <a href="singup.php">Sign Up</a></p>
                         </div>
                         <div class="mt-3 text-center">
-                            <p><a href="forgot_password.html">Forgot Password?</a></p>
+                            <p><a href="forgot_password.php">Forgot Password?</a></p>
                         </div>
                     </div>
                 </div>

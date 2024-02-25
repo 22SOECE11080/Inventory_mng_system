@@ -19,11 +19,8 @@
     <!-- @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"); -->
 
     <!-- bootstrap links -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,46 +68,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand px-5 text-primary fs-2 fw-bolder" href="#">IMS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 px-5 fs-5 fw-bold">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#Home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#About">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#Services">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#Team">Team</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="agencies.html">Agencies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#Contact">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="div">
-                        <a href="singup.html"><button type="button"
-                                class="btn btn-primary me-2 px-4 rounded-pill">Register</button></a>
-                        <a href="login.html"><button type="button"
-                                class="btn btn-outline-primary me-2 px-4 rounded-pill">Login</button></a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <?php include('header.php')  ?>
     <br>
     <br>
     <br>
@@ -124,8 +82,7 @@
                         world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
                         responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <a href="login.html"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"
-                                fdprocessedid="hgme3">Explore</button></a>
+                        <a href="login.html"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" fdprocessedid="hgme3">Explore</button></a>
 
                     </div>
                 </div>
@@ -136,7 +93,7 @@
         </div>
 
         <section>
-            
+
         </section>
     </main>
 
@@ -182,8 +139,7 @@
                         <p>Monthly digest of what's new and exciting from us.</p>
                         <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                             <label for="newsletter1" class="visually-hidden">Email address</label>
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address"
-                                fdprocessedid="rru9z9">
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address" fdprocessedid="rru9z9">
                             <button class="btn btn-primary" type="button" fdprocessedid="ztceqn">Let's
                                 Start</button>
                         </div>
