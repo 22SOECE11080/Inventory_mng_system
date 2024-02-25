@@ -7,8 +7,6 @@
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-theme.min.css"
-        integrity="sha384-zqFg5/Ql+1R0ZusNTxoz2IS4tLkKW3ivW9dA4+XD7/1e3Ha6zBBYW02xWPe1RkA2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -25,6 +23,11 @@
             background-position: center;
             color: white;
             /* background-color: black; */
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
         }
     </style>
     <script>
@@ -106,30 +109,34 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5 p-2">
-                <h2 class="text-center mb-4">Sign Up</h2>
-                <form id="signupForm" method="post">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                        <span id="name_err"></span>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Sign Up</h2>
+                        <form id="signupForm" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                                <span id="name_err"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                                <span id="email_err"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                                <span id="password_err"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                <span id="confirm_password_err"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                        <span id="email_err"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        <span id="password_err"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirm_password" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                        <span id="confirm_password_err"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sing Up</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
