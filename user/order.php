@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Order Form</title>
 
     <!-- jQuery -->
     <script src="jquery/jquery-3.7.1.min.js"></script>
@@ -21,18 +21,24 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="guest.css">
-
     <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
         }
 
-        .error {
-            color: red;
-            font-size: 0.875rem;
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background-color: #fff;
+        }
+
+        .card-title {
+            color: #333;
+            margin-bottom: 30px;
         }
 
         .form-label {
@@ -40,35 +46,82 @@
         }
 
         .form-control {
-            border-radius: 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        /* Adjust the width of the labels and inputs */
-        .form-label {
-            width: 120px;
-            /* Adjust the width as needed */
+        .btn {
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        .form-control {
-            width: calc(100% - 130px);
-            /* Adjust the width as needed */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+            border-color: #117a8b;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+
+        /* Styling for footer */
+        footer {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .nav-link {
+            color: #fff;
+        }
+
+        .nav-link:hover {
+            color: #ccc;
+        }
+
+        .socials a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .socials a:hover {
+            color: #ccc;
         }
     </style>
 
-    <!-- Custom JavaScript -->
     <script>
         $(document).ready(function() {
-            // Validation initialization
             $("#form1").validate({
                 rules: {
                     fnm: {
                         required: true,
                         minlength: 2,
                         maxlength: 20,
-                        fnregex: true
-                    },
-                    unm: {
-                        required: true
+                        letterswithspace: true
                     },
                     email: {
                         required: true,
@@ -84,23 +137,13 @@
                     },
                     address: {
                         required: true
-                    },
-                    total: {
-                        required: true
-                    },
-                    payment: {
-                        required: true
                     }
                 },
                 messages: {
                     fnm: {
                         required: "Fullname must be required",
                         minlength: "Fullname must contain at least 2 characters",
-                        maxlength: "Fullname must contain at most 20 characters",
-                        fnregex: "Fullname must contain only letters"
-                    },
-                    unm: {
-                        required: "Username must be required"
+                        maxlength: "Fullname must contain at most 20 characters"
                     },
                     email: {
                         required: "Email must be required",
@@ -116,20 +159,15 @@
                     },
                     address: {
                         required: "Address must be required"
-                    },
-                    total: {
-                        required: "Total Amount must be required"
-                    },
-                    payment: {
-                        required: "Payment Method must be required"
                     }
                 },
                 errorPlacement: function(error, element) {
-                    error.appendTo(element.parent().find(".error"));
+                    error.appendTo(element.parent());
                 }
             });
         });
     </script>
+
 </head>
 
 <body>
@@ -140,13 +178,50 @@
     <br>
     <main>
         <div class="container mt-5">
-            <div class="card">
+            <!-- Order Items Table -->
+            <div class="card mb-5">
                 <div class="card-body">
-                    <h3 class="card-title">Order Now</h3>
+                    <h2 class="card-title text-center">Order Items</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Product 1</td>
+                                    <td>$20.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Product 2</td>
+                                    <td>$30.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Product 3</td>
+                                    <td>$15.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="table-dark">
+                                <tr>
+                                    <th>Total</th>
+                                    <td>$65.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card mx-auto" style="max-width: 500px;">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Order Now</h2>
 
                     <!-- Display success or error messages -->
                     <div class="done-style"></div>
-                    <div class="error"></div>
+                    <span class="error"></span>
 
                     <!-- Order Form -->
                     <form action="order_process.php" method="post" id="form1">
@@ -205,71 +280,12 @@
                     <!-- End of Order Form -->
                 </div>
             </div>
+
         </div>
     </main>
-
     <br><br>
-    <div class="container-fluid bg-dark text-light">
-        <footer class="py-5">
-            <div class="row">
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">About</a></li>
-                    </ul>
-                </div>
 
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">About</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-6 col-md-2 mb-3">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Features</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Pricing</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">FAQs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">About</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-md-5 offset-md-1 mb-3">
-                    <form>
-                        <h5>Subscribe to our newsletter</h5>
-                        <p>Monthly digest of what's new and exciting from us.</p>
-                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                            <label for="newsletter1" class="visually-hidden">Email address</label>
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address" fdprocessedid="rru9z9">
-                            <button class="btn btn-primary" type="button" fdprocessedid="ztceqn">Let's
-                                Start</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p class="text-center">© 2023 Company, Inc. All rights reserved.</p>
-                <p class="socials ms-auto">
-                    <a href=""> <i class="bi bi-twitter text-light mx-2 fs-4"></i></a>
-                    <a href=""><i class="bi bi-linkedin text-light mx-2 fs-4"></i></a>
-                    <a href=""><i class="bi bi-github text-light mx-2 fs-4"></i></a>
-                    <a href=""><i class="bi bi-instagram text-light mx-2 fs-4"></i></a>
-                </p>
-            </div>
-        </footer>
-    </div>
+    <?php include('footer.php') ?>
 </body>
 
 </html>
