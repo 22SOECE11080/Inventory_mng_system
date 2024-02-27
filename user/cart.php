@@ -89,7 +89,7 @@
                 <h3 class="text-center">Add To Cart</h3><br>
                 <form action="addtocart.php" method="post">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped" border-1">
+                        <table class="table table-bordered table-hover table-striped border-1">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">No.</th>
@@ -97,6 +97,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
+                                    <th scope="col">Rate</th>
                                     <th scope="col">Discount</th>
                                     <th scope="col">Delete</th>
                                 </tr>
@@ -110,6 +111,7 @@
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
+                                    <td>50</td>
                                     <td><a href="#"><button type="button" class="btn btn-danger">Remove</button></a></td>
                                 </tr>
                                 <tr>
@@ -119,6 +121,7 @@
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
+                                    <td>50</td>
                                     <td><a href="#"><button type="button" class="btn btn-danger">Remove</button></a></td>
                                 </tr>
                                 <tr>
@@ -128,6 +131,7 @@
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
+                                    <td>50</td>
                                     <td><a href="#"><button type="button" class="btn btn-danger">Remove</button></a></td>
                                 </tr>
                                 <tr>
@@ -137,6 +141,7 @@
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
+                                    <td>50</td>
                                     <td><a href="#"><button type="button" class="btn btn-danger">Remove</button></a></td>
                                 </tr>
                                 <tr>
@@ -146,6 +151,7 @@
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
+                                    <td>50</td>
                                     <td><a href="#"><button type="button" class="btn btn-danger">Remove</button></a></td>
                                 </tr>
                                 <!-- End of sample rows -->
@@ -154,7 +160,7 @@
                     </div>
                     <!-- Sample total row (remove this and replace with PHP calculation) -->
                     <div class="text-end">
-                        <b>Total: <i class="fa fa-rupee"></i> 220</b>
+                        <b>Total: <i class="fa fa-rupee"></i> 225</b>
                     </div>
                     <!-- End of sample total row -->
                     <div class="text-center mt-3">

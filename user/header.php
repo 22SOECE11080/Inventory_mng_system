@@ -13,16 +13,13 @@
                             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#About">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#Services">Services</a>
+                            <a class="nav-link" aria-current="page" href="about.php">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="agencies.php">Agencies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="products.php">Products</a>
+                            <a class="nav-link" aria-current="page" href="offers.php">Offers</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="#Contact">Contact</a>

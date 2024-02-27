@@ -64,6 +64,13 @@
             font-size: 14px;
             padding-bottom: 50px;
         }
+
+        .card:hover {
+            transform: scale(1.05);
+            /* Increase the scale to 105% on hover */
+            transition: transform 1s ease;
+            /* Add a smooth transition effect */
+        }
     </style>
 </head>
 
@@ -73,6 +80,166 @@
     <br>
     <br>
     <main>
+        <section>
+            <div class="container bg-light">
+                <h1 class="text-center fs-1 fw-bold">Products</h1>
+                <p class="text-center p-2">The top Products in the company.</p>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="login.html" class="text-decoration-none">
+                            <div class="card shadow-lg">
+                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
+                                <div class="card-body">
+                                    <h3>Agency 1</h3>
+                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
+                                        <br><span><b>View Products --></b></span>.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row g-3 p-3 ">
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 p-3 ">
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="login.html" class="text-decoration-none">
+                            <div class="card shadow-lg">
+                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
+                                <div class="card-body">
+                                    <h3>Agency 1</h3>
+                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
+                                        <br><span><b>View Products --></b></span>.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row g-3 p-3 ">
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 p-3 ">
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card section-bg card1">
+                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
+                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                                        <h5 class="card-title">phone</h5>
+                                        <p class="card-text">Your text content goes here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="container my-5">
             <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
                 <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
@@ -92,9 +259,6 @@
             </div>
         </div>
 
-        <section>
-
-        </section>
     </main>
 
     <?php include('footer.php') ?>

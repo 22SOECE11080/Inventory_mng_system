@@ -112,9 +112,28 @@
             color: #ccc;
         }
     </style>
-
     <script>
         $(document).ready(function() {
+            $.validator.addMethod("letterswithspace", function(value, element) {
+                var regex = /^[a-zA-Z\s]*$/;
+                return this.optional(element) || regex.test(value);
+            }, "Must contain only letters");
+
+            $.validator.addMethod("customemail", function(value, element) {
+                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return this.optional(element) || regex.test(value);
+            }, "Please enter a valid email address");
+
+            $.validator.addMethod("customphone", function(value, element) {
+                var regex = /^\d{10}$/;
+                return this.optional(element) || regex.test(value);
+            }, "Please enter a 10-digit phone number");
+
+            $.validator.addMethod("custompin", function(value, element) {
+                var regex = /^\d{6}$/;
+                return this.optional(element) || regex.test(value);
+            }, "Please enter a 6-digit PIN code");
+
             $("#form1").validate({
                 rules: {
                     fnm: {
@@ -125,15 +144,15 @@
                     },
                     email: {
                         required: true,
-                        email: true
+                        customemail: true
                     },
                     cno: {
                         required: true,
-                        digits: true
+                        customphone: true
                     },
                     pin: {
                         required: true,
-                        digits: true
+                        custompin: true
                     },
                     address: {
                         required: true
@@ -147,15 +166,15 @@
                     },
                     email: {
                         required: "Email must be required",
-                        email: "Please enter a valid email address"
+                        customemail: "Please enter a valid email address"
                     },
                     cno: {
                         required: "Contact No must be required",
-                        digits: "Please enter only digits"
+                        customphone: "Please enter a 10-digit phone number"
                     },
                     pin: {
                         required: "Pin Code must be required",
-                        digits: "Please enter only digits"
+                        custompin: "Please enter a 6-digit PIN code"
                     },
                     address: {
                         required: "Address must be required"
@@ -167,6 +186,7 @@
             });
         });
     </script>
+
 
 </head>
 
@@ -224,59 +244,58 @@
                     <span class="error"></span>
 
                     <!-- Order Form -->
-                    <form action="order_process.php" method="post" id="form1">
-                        <div class="mb-3">
-                            <label for="fnm" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fnm" name="fnm" placeholder="Full Name" required="">
-                        </div>
+                    <div class="mb-3">
+                        <label for="fnm" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fnm" name="fnm" placeholder="Full Name" required="">
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="unm" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="unm" name="unm" placeholder="Username" required="" readonly>
-                        </div>
+                    <div class="mb-3">
+                        <label for="unm" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="unm" name="unm" placeholder="Username" required="" readonly>
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
-                        </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="cno" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="cno" name="cno" placeholder="Contact No" required="">
-                        </div>
+                    <div class="mb-3">
+                        <label for="cno" class="form-label">Contact No</label>
+                        <input type="text" class="form-control" id="cno" name="cno" placeholder="Contact No" required="">
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="pin" class="form-label">Pin Code</label>
-                            <input type="text" class="form-control" id="pin" name="pin" placeholder="Pin Code" value="360001" required="" readonly>
-                        </div>
+                    <div class="mb-3">
+                        <label for="pin" class="form-label">Pin Code</label>
+                        <input type="text" class="form-control" id="pin" name="pin" placeholder="Pin Code" value="360001" required="" readonly>
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" name="address" placeholder="Add Your Address" required=""></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" name="address" placeholder="Add Your Address" required=""></textarea>
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="total" class="form-label">Total Amount</label>
-                            <input type="text" class="form-control" id="total" name="total" placeholder="Total Amount" required="" readonly>
-                        </div>
+                    <div class="mb-3">
+                        <label for="total" class="form-label">Total Amount</label>
+                        <input type="text" class="form-control" id="total" name="total" placeholder="Total Amount" required="" readonly>
+                        <span class="error"></span>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="payment" class="form-label">Payment Method</label>
-                            <select class="form-control" id="payment" name="payment" required="" readonly>
-                                <option>Cash On Delivery</option>
-                                <option>Credit Card</option>
-                                <option>Debit Card</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label for="payment" class="form-label">Payment Method</label>
+                        <select class="form-control" id="payment" name="payment" required="" readonly>
+                            <option>Cash On Delivery</option>
+                            <option>Credit Card</option>
+                            <option>Debit Card</option>
+                        </select>
+                        <span class="error"></span>
+                    </div>
 
-                        <!-- Hidden Inputs -->
-                        <input type="hidden" name="uid" value="">
-                        <input type="hidden" name="rate" value="">
-
-                        <!-- Form Buttons -->
-                        <button type="submit" class="btn btn-primary">Place Order</button>
-                        <a href="logout.php" class="btn btn-info">Cancel</a>
-                    </form>
                     <!-- End of Order Form -->
                 </div>
             </div>

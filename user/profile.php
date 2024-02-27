@@ -67,13 +67,6 @@
             font-size: 14px;
             padding-bottom: 50px;
         }
-
-        .card:hover {
-            transform: scale(1.05);
-            /* Increase the scale to 105% on hover */
-            transition: transform 1s ease;
-            /* Add a smooth transition effect */
-        }
     </style>
 </head>
 
