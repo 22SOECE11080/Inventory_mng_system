@@ -8,11 +8,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
-            background: url("images/istockphoto-1465188429-612x612.jpg") no-repeat;
+            background-image: url('images/istockphoto-1465188429-612x612.jpg');
+            /* Replace 'path/to/your/image.jpg' with the actual path to your image */
             background-size: cover;
-            background-position: center;
-            color: white;
-            /* background-color: black; */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Adjust background image for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                background-position: center;
+            }
+        }
+
+        /* Adjust background image for extra small screens */
+        @media (max-width: 576px) {
+            body {
+                background-image: url('images/istockphoto-1465188429-612x612.jpg');
+                /* Replace 'path/to/your/small-image.jpg' with the actual path to your smaller image */
+                background-size: cover;
+                /* Add this line to ensure proper sizing */
+            }
+        }
+
+
+        /* Adjust other styles as needed */
+        .content-container {
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
         }
 
         .login-container {

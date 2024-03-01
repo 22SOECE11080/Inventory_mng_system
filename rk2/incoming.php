@@ -118,6 +118,7 @@ if ($result->num_rows > 0) {
                 <div class="navbar-nav w-100">
                     <a href="index.php" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="agency_request.php" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Agency Requests</a>
+                    <a href="agencies.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Agencies</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Stock</a>
                         <div class="dropdown-menu bg-transparent border-0">

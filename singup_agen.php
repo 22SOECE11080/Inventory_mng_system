@@ -204,6 +204,11 @@
                         </form>
                     </div>
                 </div>
+                <!-- Buttons centered below the card -->
+                <div class="text-center mt-3">
+                    <a href="singup.php"><button type="button" class="btn btn-primary">User</button></a>
+                    <a href="singup_agen.php"><button type="button" class="btn btn-primary ms-2">Admin</button></a>
+                </div>
             </div>
         </div>
     </div>

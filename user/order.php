@@ -188,6 +188,7 @@
     </script>
 
 
+
 </head>
 
 <body>
@@ -244,58 +245,60 @@
                     <span class="error"></span>
 
                     <!-- Order Form -->
-                    <div class="mb-3">
-                        <label for="fnm" class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="fnm" name="fnm" placeholder="Full Name" required="">
-                        <span class="error"></span>
-                    </div>
+                    <form id="form1" method="post" action="submit.php">
+                        <div class="mb-3">
+                            <label for="fnm" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fnm" name="fnm" placeholder="Full Name" required="">
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="unm" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="unm" name="unm" placeholder="Username" required="" readonly>
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="unm" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="unm" name="unm" placeholder="Username" required="" readonly>
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="">
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="cno" class="form-label">Contact No</label>
-                        <input type="text" class="form-control" id="cno" name="cno" placeholder="Contact No" required="">
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="cno" class="form-label">Contact No</label>
+                            <input type="text" class="form-control" id="cno" name="cno" placeholder="Contact No" required="">
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="pin" class="form-label">Pin Code</label>
-                        <input type="text" class="form-control" id="pin" name="pin" placeholder="Pin Code" value="360001" required="" readonly>
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="pin" class="form-label">Pin Code</label>
+                            <input type="text" class="form-control" id="pin" name="pin" placeholder="Pin Code" value="360001" required="" readonly>
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
-                        <textarea class="form-control" id="address" name="address" placeholder="Add Your Address" required=""></textarea>
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" placeholder="Add Your Address" required=""></textarea>
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="total" class="form-label">Total Amount</label>
-                        <input type="text" class="form-control" id="total" name="total" placeholder="Total Amount" required="" readonly>
-                        <span class="error"></span>
-                    </div>
+                        <div class="mb-3">
+                            <label for="total" class="form-label">Total Amount</label>
+                            <input type="text" class="form-control" id="total" name="total" placeholder="Total Amount" required="" readonly>
+                            <span class="error"></span>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="payment" class="form-label">Payment Method</label>
-                        <select class="form-control" id="payment" name="payment" required="" readonly>
-                            <option>Cash On Delivery</option>
-                            <option>Credit Card</option>
-                            <option>Debit Card</option>
-                        </select>
-                        <span class="error"></span>
-                    </div>
-
+                        <div class="mb-3">
+                            <label for="payment" class="form-label">Payment Method</label>
+                            <select class="form-control" id="payment" name="payment" required="" readonly>
+                                <option>Cash On Delivery</option>
+                                <option>Credit Card</option>
+                                <option>Debit Card</option>
+                            </select>
+                            <span class="error"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Place Order</button>
+                    </form>
                     <!-- End of Order Form -->
                 </div>
             </div>

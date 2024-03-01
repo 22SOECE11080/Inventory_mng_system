@@ -22,7 +22,7 @@
                             <a class="nav-link" aria-current="page" href="offers.php">Offers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#Contact">Contact</a>
+                            <a class="nav-link" aria-current="page" href="contact.php">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="profile.php">profile</a>

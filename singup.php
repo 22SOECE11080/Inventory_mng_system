@@ -15,11 +15,36 @@
         }
 
         body {
-            background: url("images/istockphoto-1465188429-612x612.jpg") no-repeat;
+            background-image: url('images/istockphoto-1465188429-612x612.jpg');
+            /* Replace 'path/to/your/image.jpg' with the actual path to your image */
             background-size: cover;
-            background-position: center;
-            color: white;
-            /* background-color: black; */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Adjust background image for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                background-position: center;
+            }
+        }
+
+        /* Adjust background image for extra small screens */
+        @media (max-width: 576px) {
+            body {
+                background-image: url('images/istockphoto-1465188429-612x612.jpg');
+                /* Replace 'path/to/your/small-image.jpg' with the actual path to your smaller image */
+                background-size: cover;
+                /* Add this line to ensure proper sizing */
+            }
+        }
+
+
+        /* Adjust other styles as needed */
+        .content-container {
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
         }
 
         .card {
@@ -132,13 +157,17 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Sign Up</button>
                         </form>
-
-
                     </div>
+                </div>
+                <!-- Buttons centered below the card -->
+                <div class="text-center mt-3">
+                    <a href="singup.php"><button type="button" class="btn btn-primary">User</button></a>
+                    <a href="singup_agen.php"><button type="button" class="btn btn-primary ms-2">Admin</button></a>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

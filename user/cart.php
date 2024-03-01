@@ -95,10 +95,11 @@
                                     <th scope="col">No.</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Agency</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Qty</th>
-                                    <th scope="col">Rate</th>
                                     <th scope="col">Discount</th>
+                                    <th scope="col">Rate</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -108,6 +109,7 @@
                                     <td>1</td>
                                     <td><img src="image1/istockphoto-1465188429-612x612.jpg" style="width:40px" ; /></td>
                                     <td>Product Name</td>
+                                    <td>abc</td>
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
@@ -118,6 +120,7 @@
                                     <td>2</td>
                                     <td><img src="image1/istockphoto-1465188429-612x612.jpg" style="width:40px" ; /></td>
                                     <td>Product Name</td>
+                                    <td>abc</td>
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
@@ -128,6 +131,7 @@
                                     <td>3</td>
                                     <td><img src="image1/istockphoto-1465188429-612x612.jpg" style="width:40px" ; /></td>
                                     <td>Product Name</td>
+                                    <td>abc</td>
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
@@ -138,6 +142,7 @@
                                     <td>4</td>
                                     <td><img src="image1/istockphoto-1465188429-612x612.jpg" style="width:40px" ; /></td>
                                     <td>Product Name</td>
+                                    <td>abc</td>
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>
@@ -148,6 +153,7 @@
                                     <td>5</td>
                                     <td><img src="image1/istockphoto-1465188429-612x612.jpg" style="width:40px" ; /></td>
                                     <td>Product Name</td>
+                                    <td>abc</td>
                                     <td><i class="fa fa-rupee"></i> 50</td>
                                     <td><input type="number" value="1" min="1" name="1" /></td>
                                     <td>10%</td>

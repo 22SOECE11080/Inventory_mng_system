@@ -77,8 +77,6 @@
 <body>
     <?php include('header.php')  ?>
     <br>
-    <br>
-    <br>
     <main>
         <section>
             <div class="container bg-light">

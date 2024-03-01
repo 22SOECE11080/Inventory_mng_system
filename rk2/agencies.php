@@ -114,7 +114,7 @@ if ($result->num_rows > 0) {
                     </div>
                     <div class="navbar-nav w-100">
                         <a href="index.php" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                        <a href="agency_request.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Agency Requests</a>
+                        <a href="agency_request.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Agency Requests</a>
                         <a href="agencies.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Agencies</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Stock</a>
@@ -220,79 +220,111 @@ if ($result->num_rows > 0) {
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Incoming Agencies</h6>
+                            <h6 class="mb-0">Agency 1</h6>
                         </div>
                         <div class="table-responsive">
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <h6 class="mb-0">Products</h6>
                                 <thead>
                                     <tr class="text-dark">
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Agency Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">GST Number</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Approves</th> <!-- Added column header for Approves -->
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>2024-02-27</td>
-                                        <td>Example Agency 1</td>
-                                        <td>example1@example.com</td>
-                                        <td>123456789</td>
-                                        <td>123-456-7890</td>
-                                        <td>New York</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
+                                        <td>1</td>
+                                        <td>Product A</td>
+                                        <td>$10</td>
+                                        <td>100</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>2024-02-28</td>
-                                        <td>Example Agency 2</td>
-                                        <td>example2@example.com</td>
-                                        <td>987654321</td>
-                                        <td>987-654-3210</td>
-                                        <td>Los Angeles</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
+                                        <td>2</td>
+                                        <td>Product B</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
+                                        <td>3</td>
+                                        <td>Product C</td>
+                                        <td>$30</td>
+                                        <td>300</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
+                                        <td>4</td>
+                                        <td>Product D</td>
+                                        <td>$40</td>
+                                        <td>400</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
-                                    </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                        <td><button class="btn btn-primary">Approve</button></td> <!-- Button added to the last column -->
+                                        <td>5</td>
+                                        <td>Product E</td>
+                                        <td>$50</td>
+                                        <td>500</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
-
+                            <br>
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <h6 class="mb-0">Customers</h6>
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>John Doe</td>
+                                        <td>johndoe@example.com</td>
+                                        <td>Product A</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-02-27</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
+                                </tbody>
+                            </table>
 
                         </div>
                     </div>
@@ -306,106 +338,109 @@ if ($result->num_rows > 0) {
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Current Agencies</h6>
+                            <h6 class="mb-0">Agency 2</h6>
                         </div>
                         <div class="table-responsive">
-                            <!-- <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Qty</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($sellinfo = mysqli_fetch_assoc($result3)) {
-                                        if ($result3->num_rows > 0) {
-
-
-
-                                    ?>
-                                            <tr>
-
-                                                <td><?php echo $sellinfo['date']; ?></td>
-                                                <td><?php echo $sellinfo['Name']; ?></td>
-                                                <td><?php echo $sellinfo['Stock']; ?></td>
-
-                                            </tr>
-                                    <?php }
-                                    } ?>
-                                </tbody>
-                            </table> -->
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <h6 class="mb-0">Products</h6>
                                 <thead>
                                     <tr class="text-dark">
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Agency Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">GST Number</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">City</th>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
+                                        <td>Product A</td>
+                                        <td>$10</td>
+                                        <td>100</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Product B</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Product C</td>
+                                        <td>$30</td>
+                                        <td>300</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Product D</td>
+                                        <td>$40</td>
+                                        <td>400</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Product E</td>
+                                        <td>$50</td>
+                                        <td>500</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <h6 class="mb-0">Customers</h6>
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Customer Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>John Doe</td>
+                                        <td>johndoe@example.com</td>
+                                        <td>Product A</td>
+                                        <td>100</td>
+                                        <td>$10</td>
                                         <td>2024-02-27</td>
-                                        <td>Example Agency 1</td>
-                                        <td>example1@example.com</td>
-                                        <td>123456789</td>
-                                        <td>123-456-7890</td>
-                                        <td>New York</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>2</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>200</td>
+                                        <td>$20</td>
                                         <td>2024-02-28</td>
-                                        <td>Example Agency 2</td>
-                                        <td>example2@example.com</td>
-                                        <td>987654321</td>
-                                        <td>987-654-3210</td>
-                                        <td>Los Angeles</td>
+                                        <td>
+                                            <button class="btn btn-primary">Remove</button>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-03-01</td>
-                                        <td>Example Agency 3</td>
-                                        <td>example3@example.com</td>
-                                        <td>456123789</td>
-                                        <td>456-123-7890</td>
-                                        <td>Chicago</td>
-                                    </tr>
+                                    <!-- Add more rows as needed -->
                                 </tbody>
                             </table>
 
