@@ -115,7 +115,7 @@ if ($result->num_rows > 0) {
                     <div class="navbar-nav w-100">
                         <a href="index.php" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                         <a href="agency_request.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Agency Requests</a>
-                        <a href="agencies.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Agencies</a>
+                        <a href="agencies.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Agencies</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Stock</a>
                             <div class="dropdown-menu bg-transparent border-0">
@@ -216,85 +216,184 @@ if ($result->num_rows > 0) {
                 <!-- Navbar End -->
 
 
-                <!-- Recent Sales Start -->
+                <!-- Current Product Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Agency 1</h6>
+                            <h6 class="mb-0">Current Products</h6>
                         </div>
                         <div class="table-responsive">
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <h6 class="mb-0">Products</h6>
                                 <thead>
                                     <tr class="text-dark">
                                         <th scope="col">ID</th>
                                         <th scope="col">Product Name</th>
+                                        <th scope="col">Agency Name</th>
                                         <th scope="col">Rate</th>
                                         <th scope="col">Quantity</th>
-                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td>Product A</td>
+                                        <td>Agency X</td>
                                         <td>$10</td>
                                         <td>100</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Product B</td>
-                                        <td>$20</td>
-                                        <td>200</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>$10</td>
+                                        <td>100</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Product C</td>
-                                        <td>$30</td>
-                                        <td>300</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>$10</td>
+                                        <td>100</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
-                                        <td>Product D</td>
-                                        <td>$40</td>
-                                        <td>400</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>$10</td>
+                                        <td>100</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
-                                        <td>Product E</td>
-                                        <td>$50</td>
-                                        <td>500</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>$10</td>
+                                        <td>100</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>$10</td>
+                                        <td>100</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>$20</td>
+                                        <td>200</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Add more rows as needed -->
                                 </tbody>
                             </table>
-                            <br>
+                        </div>
+                    </div>
+                </div>
+                <!--     -->
+
+                <!-- Current Customers Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Customers</h6>
+                        </div>
+                        <div class="table-responsive">
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <h6 class="mb-0">Customers</h6>
                                 <thead>
                                     <tr class="text-dark">
                                         <th scope="col">ID</th>
                                         <th scope="col">Customer Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Product</th>
+                                        <th scope="col">Agency</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Rate</th>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -303,11 +402,15 @@ if ($result->num_rows > 0) {
                                         <td>John Doe</td>
                                         <td>johndoe@example.com</td>
                                         <td>Product A</td>
+                                        <td>Agency X</td>
                                         <td>100</td>
                                         <td>$10</td>
                                         <td>2024-02-27</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -315,14 +418,145 @@ if ($result->num_rows > 0) {
                                         <td>Jane Smith</td>
                                         <td>janesmith@example.com</td>
                                         <td>Product B</td>
+                                        <td>Agency Y</td>
                                         <td>200</td>
                                         <td>$20</td>
                                         <td>2024-02-28</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
-                                    <!-- Add more rows as needed -->
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Jane Smith</td>
+                                        <td>janesmith@example.com</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-02-28</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
@@ -332,125 +566,332 @@ if ($result->num_rows > 0) {
                 <!--     -->
 
 
-
-
-                <!-- Current Start -->
+                <!-- Current offers Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Agency 2</h6>
+                            <h6 class="mb-0">Offers</h6>
                         </div>
                         <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <h6 class="mb-0">Products</h6>
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">s
                                 <thead>
                                     <tr class="text-dark">
                                         <th scope="col">ID</th>
+                                        <th scope="col">Offers</th>
                                         <th scope="col">Product Name</th>
-                                        <th scope="col">Rate</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Agency Name</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
+                                        <td>Offer 1</td>
                                         <td>Product A</td>
-                                        <td>$10</td>
-                                        <td>100</td>
+                                        <td>10%</td>
+                                        <td>Agency X</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
+                                        <td>Offer 2</td>
                                         <td>Product B</td>
-                                        <td>$20</td>
-                                        <td>200</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Product C</td>
-                                        <td>$30</td>
-                                        <td>300</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>4</td>
-                                        <td>Product D</td>
-                                        <td>$40</td>
-                                        <td>400</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
-                                        <td>Product E</td>
-                                        <td>$50</td>
-                                        <td>500</td>
-                                        <td>
-                                            <button class="btn btn-primary">Remove</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <br>
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <h6 class="mb-0">Customers</h6>
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Customer Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Rate</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Remove</th> <!-- Adding a column for Remove -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>John Doe</td>
-                                        <td>johndoe@example.com</td>
-                                        <td>Product A</td>
-                                        <td>100</td>
-                                        <td>$10</td>
-                                        <td>2024-02-27</td>
-                                        <td>
-                                            <button class="btn btn-primary">Remove</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jane Smith</td>
-                                        <td>janesmith@example.com</td>
+                                        <td>Offer 2</td>
                                         <td>Product B</td>
-                                        <td>200</td>
-                                        <td>$20</td>
-                                        <td>2024-02-28</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
                                         <td>
-                                            <button class="btn btn-primary">Remove</button>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
                                         </td>
                                     </tr>
-                                    <!-- Add more rows as needed -->
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Offer 2</td>
+                                        <td>Product B</td>
+                                        <td>20%</td>
+                                        <td>Agency Y</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
                 </div>
-                <!-- Recent Sales End -->
+                <!--     -->
 
+                <!-- Current orders Start -->
+                <div class="container-fluid pt-4 px-4">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Orders</h6>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <h6 class="mb-0">Orders</h6>
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">Order ID</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Agency Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Product B</td>
+                                        <td>Agency Y</td>
+                                        <td>200</td>
+                                        <td>$20</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Product A</td>
+                                        <td>Agency X</td>
+                                        <td>100</td>
+                                        <td>$10</td>
+                                        <td>2024-03-01</td>
+                                        <td>
+                                            <button class="btn btn-primary">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger">Remove</button>
+                                        </td>
+                                    </tr>
+                            </table>
 
-
+                        </div>
+                    </div>
+                </div>
+                <!--     -->
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
