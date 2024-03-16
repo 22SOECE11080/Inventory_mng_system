@@ -73,8 +73,6 @@
 <body>
     <?php include('header.php') ?>
     <br>
-    <br>
-    <br>
     <main>
         <div class="container mt-5">
             <div class="row justify-content-center">

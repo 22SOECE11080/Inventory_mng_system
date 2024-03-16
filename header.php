@@ -1,5 +1,5 @@
 <header>
-    <div class="container-fluid bg-dark text-light d-flex justify-content-between align-items-center py-3">
+    <div class="container-fluid bg-dark text-light d-flex justify-content-between align-items-center py-2">
         <!-- Logo on the left -->
         <a class="navbar-brand px-5 text-primary fs-2 fw-bolder" href="#">IMS</a>
         <!-- Phone number on the right -->

@@ -195,8 +195,6 @@
     <!-- Header -->
     <?php include('header.php') ?>
     <br>
-    <br>
-    <br>
     <main>
         <div class="container mt-5">
             <!-- Order Items Table -->

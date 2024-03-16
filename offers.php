@@ -1,3 +1,6 @@
+<?php
+include_once("include/conn.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,164 +67,91 @@
             font-size: 14px;
             padding-bottom: 50px;
         }
-
-        .card:hover {
-            transform: scale(1.05);
-            /* Increase the scale to 105% on hover */
-            transition: transform 1s ease;
-            /* Add a smooth transition effect */
-        }
     </style>
 </head>
 
 <body>
     <?php include('header.php')  ?>
+    <br>
     <main>
         <section>
             <div class="container bg-light">
                 <h1 class="text-center fs-1 fw-bold">Offers</h1>
                 <p class="text-center p-2">The top Offers in the company.</p>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <a href="login.html" class="text-decoration-none">
-                            <div class="card shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 1</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                    <?php
+                    // Assuming you have your database connection established already
 
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="row g-3 p-3 ">
-                            <div class="row g-3 p-3">
-                                <div class="col-sm-6 d-flex justify-content-center">
-                                    <div class="card section-bg card1">
-                                        <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Phone</h5>
-                                            <p class="card-text">Your text content goes here.</p>
+                    // Execute the SQL query
+                    $sql = "SELECT products.p_id, products.p_name, products.price, products.quantity, products.discount, products.p_image, agency.a_name
+                FROM products
+                INNER JOIN agency ON products.a_id = agency.a_id
+                ORDER BY agency.a_name";
+                    $result = mysqli_query($conn, $sql);
+
+                    // Check if there are any results
+                    if (mysqli_num_rows($result) > 0) {
+                        // Initialize an associative array to group products by agency name
+                        $groupedProducts = array();
+
+                        // Group products by agency name
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $agencyName = $row['a_name'];
+                            if (!array_key_exists($agencyName, $groupedProducts)) {
+                                $groupedProducts[$agencyName] = array();
+                            }
+                            $groupedProducts[$agencyName][] = $row;
+                        }
+
+                        // Output data for each agency
+                        foreach ($groupedProducts as $agencyName => $products) {
+                    ?>
+                            <div class="col-sm-4 col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-header"><?php echo $agencyName; ?></div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <?php
+                                            $count = 0;
+                                            foreach ($products as $product) {
+                                                if ($count % 2 == 0 && $count > 0) {
+                                                    echo '</div><div class="row">';
+                                                }
+                                            ?>
+                                                <div class="col-sm-6">
+                                                    <div class="card">
+                                                        <img src="image1/p1.jpeg" class="card-img-top image-fluid" alt="Product Image">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><?php echo $product['p_name']; ?></h5>
+                                                            <p class="card-text">Price: <?php echo $product['price']; ?></p>
+                                                            <p class="card-text">Discount: <?php echo $product['discount']; ?></p>
+                                                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                                $count++;
+                                            }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 d-flex justify-content-center">
-                                    <div class="card section-bg card1">
-                                        <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Phone</h5>
-                                            <p class="card-text">Your text content goes here.</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+                    <?php
+                        }
+                    } else {
+                        echo "0 results";
+                    }
 
-                        </div>
-                        <div class="row g-3 p-3">
-                            <div class="col-sm-6 d-flex justify-content-center">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">Phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 d-flex justify-content-center">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title">Phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a href="login.html" class="text-decoration-none">
-                            <div class="card shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 1</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    // Close the database connection
+                    mysqli_close($conn);
+                    ?>
                 </div>
             </div>
-        </section>
 
+
+            </div>
+        </section>
         <div class="container my-5">
             <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
                 <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
@@ -236,7 +166,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg border-2 border-dark">
-                    <img class="rounded-lg-3 image-fluid" src="images/pexels-lukas-669612.jpg" alt="" width="720">
+                    <img class="rounded-lg-3 image-fluid" src="image1/pexels-lukas-669612.jpg" alt="" width="720">
                 </div>
             </div>
         </div>
@@ -248,3 +178,19 @@
 </body>
 
 </html>
+<?php 
+// Fetch products from the database
+$sql = "SELECT * FROM products";
+$result = mysqli_query($conn, $sql);
+$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Handle adding items to the cart
+if(isset($_POST['add_to_cart']) && isset($_POST['product_id'])) {
+    $productId = $_POST['product_id'];
+    // Add the product ID to the cart array in session
+    $_SESSION['cart'][] = $productId;
+    // Redirect to prevent form resubmission
+    header("Location: index.php");
+    exit;
+}
+?>

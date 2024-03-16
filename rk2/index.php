@@ -23,10 +23,6 @@ include 'dbconn.php';
 
 $username = $_SESSION['username'];
 
-
-
-
-
 $query = "SELECT * FROM admin WHERE username = '$username'";
 
 $result = $conn->query($query);
@@ -100,7 +96,6 @@ if ($result->num_rows > 0) {
         </div>
         <!-- Spinner End -->
 
-
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
@@ -134,7 +129,6 @@ if ($result->num_rows > 0) {
             </nav>
         </div>
         <!-- Sidebar End -->
-
 
         <!-- Content Start -->
         <div class="content">
@@ -220,7 +214,6 @@ if ($result->num_rows > 0) {
             </nav>
             <!-- Navbar End -->
 
-
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
@@ -230,7 +223,6 @@ if ($result->num_rows > 0) {
                             <div class="ms-3">
                                 <p class="mb-2 text-success">Total Stock</p>
                                 <h6 class="mb-0"><?php if ($result1->num_rows > 0) {
-
 $stockData = $result1->fetch_assoc();
                                     echo $stockData["SUM(stock)"];
 }
@@ -244,7 +236,6 @@ $stockData = $result1->fetch_assoc();
                             <div class="ms-3">
                                 <p class="mb-2 text-success">Total sell</p>
                                 <h6 class="mb-0"><?php if ($result2->num_rows > 0) {
-
 $sellData = $result2->fetch_assoc();
                                     echo $sellData["SUM(qty)"];
 }
@@ -266,20 +257,15 @@ $sellData = $result2->fetch_assoc();
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
-                                    
                                     <th scope="col">Date</th>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Qty</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
                             <?php 
                             while($stockinfo = mysqli_fetch_assoc($result4)){
                             if ($result4->num_rows > 0) {
-
-                                
-
 ?>
                                 <tr>
                                     
@@ -295,9 +281,6 @@ $sellData = $result2->fetch_assoc();
                 </div>
             </div>
             <!--     -->
-
-
-
 
             <!-- Recent Sales Start -->
             <div class="container-fluid pt-4 px-4">
@@ -320,16 +303,11 @@ $sellData = $result2->fetch_assoc();
                             <?php 
                             while($sellinfo = mysqli_fetch_assoc($result3)){
                             if ($result3->num_rows > 0) {
-
-                                
-
 ?>
-                                <tr>
-                                    
+                                <tr>       
                                     <td><?php echo $sellinfo['date'];?></td>
                                     <td><?php echo $sellinfo['name'];?></td>
-                                    <td><?php echo $sellinfo['qty'];?></td>
-                                    
+                                    <td><?php echo $sellinfo['qty'];?></td>   
                                 </tr>
 <?php } }?>
                             </tbody>
@@ -338,9 +316,6 @@ $sellData = $result2->fetch_assoc();
                 </div>
             </div>
             <!-- Recent Sales End -->
-
-
-
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">

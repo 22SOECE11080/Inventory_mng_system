@@ -1,11 +1,11 @@
 <header>
-    <div class="container-fluid bg-dark text-light d-flex justify-content-between align-items-center py-3">
+    <div class="container-fluid bg-dark text-light d-flex justify-content-between align-items-center py-2">
         <!-- Logo on the left -->
-        <a class="navbar-brand px-5 text-primary fs-2 fw-bolder" href="#">IMS</a>
+        <a class="navbar-brand px-4 text-primary fs-2 fw-bolder" href="#">IMS</a>
         <!-- Phone number on the right -->
         <span class="text-white me-5">Phone: 123-456-7890</span>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-top border-light">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                         <a class="nav-link" aria-current="page" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#Contact">Logout</a>
+                        <a class="nav-link" aria-current="page" href="#Contact">Logout<i class="bi bi-box-arrow-left"></i></a>
                     </li>
                 </ul>
                 <ul class="navbar-nav fw-bold">
@@ -42,5 +42,4 @@
             </div>
         </div>
     </nav>
-
 </header>

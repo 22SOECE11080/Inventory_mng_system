@@ -73,8 +73,6 @@
 <body>
     <?php include('header.php'); ?>
     <br>
-    <br>
-    <br>
     <main>
         <div class="container-fluid">
             <div id="Home" class="carousel slide" data-bs-ride="carousel">
