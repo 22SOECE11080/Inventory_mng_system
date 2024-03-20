@@ -1,3 +1,44 @@
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Include your database connection file
+    include 'include/conn.php';
+
+    // Retrieve form data
+    $r_name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Check if the email already exists
+    $check_sql = "SELECT * FROM retailer WHERE email = '$email'";
+    $result = $conn->query($check_sql);
+
+    if ($result === FALSE) {
+        echo "Error checking email: " . $conn->error;
+    } else {
+        if ($result->num_rows > 0) {
+            ?>
+            <script>
+                alert("Email already exists. Please use a different email address.");
+            </script>
+            <?php
+        } else {
+            // Insert data into the table without hashing the password
+            $insert_sql = "INSERT INTO retailer (r_name, email, password) VALUES ('$r_name', '$email', '$password')";
+
+            // Execute the SQL query
+            if ($conn->query($insert_sql) === TRUE) {
+                // Redirect to a success page after successful data insertion
+                header("Location: guest1.php");
+                exit();
+            } else {
+                echo "Error inserting data: " . $conn->error;
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,7 +175,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Sign Up</h2>
-                        <form id="signupForm" method="post">
+                        <form id="signupForm" method="post" action="singup.php">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">

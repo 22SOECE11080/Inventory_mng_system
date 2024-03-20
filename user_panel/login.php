@@ -1,86 +1,64 @@
 <?php
-$login = false;
-$showError = false;
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    include 'dbconn.php';
-    $username = $_POST["username"];
-    $password = $_POST["password"]; 
-    
-    $sql = "SELECT * FROM agency WHERE username = '$username' AND password = '$password' ";
-    $result = mysqli_query($conn, $sql);
-    $num = mysqli_num_rows($result);
-    if ($num == 1){
-        $login = true;
-        session_start();
-        $_SESSION['stulogin'] = true;
-        $_SESSION['username'] = $username;
-        header("location: index.php");
+session_start();
 
-    } 
-    else{
-        $showError = "Invalid Credentials";
-    }
+// Check if the user is already logged in
+if (isset($_SESSION['agency_username'])) {
+    header("Location: index.php"); // Redirect to the index page or dashboard
+    exit();
 }
+
+$showError = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+    include_once('dbconn.php');
+
+    // Get the form data
+    $agency_username = $_POST['agency_username'];
+    $password = $_POST['password'];
+
+    // SQL query to fetch user data
+    $sql = "SELECT * FROM agency WHERE agency_username = '$agency_username' AND password = '$password'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+
+        // Start the session and store user data
+        $_SESSION['agency_username'] = $row['agency_username'];
+        $_SESSION['stulogin'] = true;
+
+        header("Location: index.php"); // Redirect to the index page or dashboard
+        exit();
+    } else {
+        $showError = true;
+    }
+
+    mysqli_close($conn); // Close the database connection
+}
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-  </head>
-  <body>
-    <?php
+</head>
+<body>
+    <?php if ($showError): ?>
+        <p style="color: red;">Invalid credentials. Please try again.</p>
+    <?php endif; ?>
 
-    if($login){
-    echo ' <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> You are logged in
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div> ';
-    }
-    if($showError){
-    echo ' <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong> '. $showError.'
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div> ';
-    }
-    ?>
+    <h1>Login</h1>
+    <form action="login.php" method="post">
+        <label for="agency_username">agency_username:</label>
+        <input type="text" id="agency_username" name="agency_username" required><br><br>
 
-    <div class="container my-4">
-     <h1 class="text-center">Login to Admin Panel</h1>
-     <form action="login.php" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
-            
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-       
-         
-        <button type="submit" class="btn btn-primary">Login</button>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
 
-
-     </form>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+        <input type="submit" value="Login">
+    </form>
+</body>
 </html>

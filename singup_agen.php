@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+include_once ('include/conn.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve data from the form
+    $a_name = $_POST['first_name'] . ' ' . $_POST['last_name'];
+    $gst_number = $_POST['gst_number'];
+    $phone_number = $_POST['phone_number'];
+    $username = $_POST['email']; // Assuming email as username
+    $country = $_POST['country'];
+    $state = $_POST['state'];
+    $city = $_POST['city'];
+    $pincode = $_POST['pincode'];
+    $status = 'inactive'; // Default status
+    $password = $_POST['password']; // You can set this as needed
+
+    // Simple insert query
+    $sql = "INSERT INTO agency (a_name, gst_number, phone_number, username, country, state, city, pincode, status, password) VALUES ('$a_name', '$gst_number', '$phone_number', '$username', '$country', '$state', '$city', '$pincode', '$status', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record inserted successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +48,6 @@
             background-size: cover;
             background-position: center;
             color: white;
-            /* background-color: black; */
         }
 
         .card {
@@ -41,8 +69,17 @@
                     },
                     email: {
                         required: true,
-                        email: true, // This checks if the entered value is a valid email format
+                        email: true,
                         regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    },
+                    password: {
+                        required: true,
+                        minlength: 8
+                    },
+                    confirm_password: {
+                        required: true,
+                        minlength: 8,
+                        equalTo: "#password"
                     },
                     agency_name: {
                         required: true,
@@ -83,6 +120,15 @@
                         required: "Please enter your email address",
                         email: "Please enter a valid email address",
                         regex: "Please enter a valid email address"
+                    },
+                    password: {
+                        required: "Please enter your password",
+                        minlength: "Password must be at least 8 characters long"
+                    },
+                    confirm_password: {
+                        required: "Please enter confirm password",
+                        minlength: "Confirm password must be at least 8 characters long",
+                        equalTo: "Passwords do not match"
                     },
                     agency_name: {
                         required: "Please enter your agency name",
@@ -145,6 +191,16 @@
                                 <label for="email" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                                 <span id="email_err"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <span id="password_err"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                <span id="confirm_password_err"></span>
                             </div>
                             <div class="mb-3">
                                 <label for="agency_name" class="form-label">Agency Name</label>

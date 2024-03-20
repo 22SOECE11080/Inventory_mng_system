@@ -1,6 +1,6 @@
 <?php 
 
-include "dbconn.php";
+include "dbcon.php";
 
     if (isset($_POST['update'])) {
         

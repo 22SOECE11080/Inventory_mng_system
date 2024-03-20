@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
 
         if ($result) {
             // Redirect back to agencies page after deletion
-            header("Location: agency_request.php");
+            header("Location: agencies.php");
             exit();
         } else {
             echo "Error deleting agency: " . $conn->error;
@@ -44,11 +44,8 @@ $username = $_SESSION['username'];
 $query = "SELECT * FROM admin WHERE admin_username = '$username'";
 $result = $conn->query($query);
 
-$query3 = "SELECT * FROM agency where status = 'inactive'";
+$query3 = "SELECT * FROM retailer";
 $result3 = $conn->query($query3);
-
-$query4 = "SELECT * FROM agency Where status = 'active' ";
-$result4 = $conn->query($query4);
 
 if ($result->num_rows > 0) {
     $userData = $result->fetch_assoc();
@@ -108,23 +105,25 @@ if ($result->num_rows > 0) {
                 <?php include_once ('admin_nav.php') ?>
                 <!-- Navbar End -->
 
-                <!-- Recent Sales Start -->
+               
+
+                <!-- Current Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Incoming Agencies</h6>
+                            <h6 class="mb-0">Retailer</h6>
                         </div>
                         <div class="table-responsive">
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
                                 <thead>
                                     <tr class="text-dark">
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Agency Name</th>
+                                        <th scope="col">id</th>
+                                        <th scope="col">Retailer Name</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">GST Number</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Approves</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -132,58 +131,16 @@ if ($result->num_rows > 0) {
                                     while ($row = mysqli_fetch_assoc($result3)) {
                                     ?>
                                         <tr>
+                                            <td><?php echo $row['r_id']; ?></td>
+                                            <td><?php echo $row['r_name']; ?></td>
+                                            <td><?php echo $row['email']; ?></td>
+                                            <td><?php echo $row['password']; ?></td>
                                             <td><?php echo $row['date']; ?></td>
-                                            <td><?php echo $row['a_name']; ?></td>
-                                            <td><?php echo $row['agency_username']; ?></td>
-                                            <td><?php echo $row['gst_number']; ?></td>
-                                            <td><?php echo $row['phone_number']; ?></td>
-                                            <td><?php echo $row['city']; ?></td>
-                                            <td><a href="agency_request.php?id=<?php echo $row['a_id']; ?>" class="btn btn-primary">Approve</a></td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- Recent Sales End -->
-
-                <!-- Current Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="bg-light text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Current Agencies</h6>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Agency Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">GST Number</th>
-                                        <th scope="col">Phone Number</th>
-                                        <th scope="col">City</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($result4)) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $row['date']; ?></td>
-                                            <td><?php echo $row['a_name']; ?></td>
-                                            <td><?php echo $row['agency_username']; ?></td>
-                                            <td><?php echo $row['gst_number']; ?></td>
-                                            <td><?php echo $row['phone_number']; ?></td>
-                                            <td><?php echo $row['city']; ?></td>
                                             <td>
-                                                <a href="edit_agency.php?id=<?php echo $row['a_id']; ?>" class="btn btn-primary">Edit</a>
+                                                <a href="retailer.php?id=<?php echo $row['r_id']; ?>" class="btn btn-primary">Edit</a>
                                             </td>
                                             <td>
-                                                <a href="delete_agency.php?id=<?php echo $row['a_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="retailer.php?id=<?php echo $row['r_id']; ?>" class="btn btn-danger">Delete</a>
                                             </td> <!-- Added Edit and Delete buttons -->
                                         </tr>
                                     <?php } ?>
