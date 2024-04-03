@@ -93,6 +93,7 @@
                                 <p class="card-text"><strong>Date of Birth:</strong> January 1, 2004</p>
                                 <p class="card-text"><strong>Gender:</strong> Male</p>
                                 <!-- Edit Button -->
+                                
                                 <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
                             </div>
                         </div>

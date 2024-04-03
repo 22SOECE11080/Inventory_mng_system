@@ -6,32 +6,17 @@ if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
     exit(); // Ensure no further code execution after redirection
 }
 
-include 'dbcon.php';
+include_once("../include/conn.php");
 
 $username = $_SESSION['username'];
 
 $query = "SELECT * FROM admin WHERE admin_username = '$username'";
 $result = $conn->query($query);
 
-$query3 = "SELECT * FROM retailer";
-$result3 = $conn->query($query3);
 
 if ($result->num_rows > 0) {
     $userData = $result->fetch_assoc();
 
-    // Delete operation for retailer table
-    if (isset($_GET['delete_retailer']) && $_GET['delete_retailer'] != '') {
-        $retailId = $_GET['delete_retailer'];
-        $deleteQuery = "DELETE FROM retailer WHERE r_id = $retailId";
-        if ($conn->query($deleteQuery) === TRUE) {
-            echo "<script>alert('Retailer deleted successfully!');</script>";
-            // Refresh the page to reflect changes after deletion
-            echo "<script>window.location.href = 'retailers.php';</script>";
-            exit;
-        } else {
-            echo "<script>alert('Error deleting retailer: " . $conn->error . "');</script>";
-        }
-    }
 ?>
 
 
@@ -88,51 +73,80 @@ if ($result->num_rows > 0) {
                 <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
 
-
-
-                <!-- Current Start -->
-                <div class="container-fluid pt-4 px-4">
+                <div class="container-fluid pt-4">
                     <div class="bg-light text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Retailer</h6>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col">id</th>
-                                        <th scope="col">Retailer Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($result3)) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $row['r_id']; ?></td>
-                                            <td><?php echo $row['r_name']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['password']; ?></td>
-                                            <td><?php echo $row['date']; ?></td>
-                                            <td>
-                                                <a href="retailers.php?id=<?php echo $row['r_id']; ?>" class="btn btn-primary">Edit</a>
-                                            </td>
-                                            <td>
-                                            <a href="?delete_retailer=<?php echo $row['r_id']; ?>" onclick="return confirm('Are you sure you want to delete this retailer?');" class="btn btn-danger btn-sm">Delete</a>
-                                            </td> <!-- Added Edit and Delete buttons -->
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <h2 class="mb-4">Edit About Us</h2>
+                        <?php
+                        // Check if the form is submitted
+                        if (isset($_POST['update'])) {
+                            // Get the form data
+                            $about_id = $_POST['about_id'];
+                            $title = $_POST['title'];
+                            $subtitle = $_POST['subtitle'];
+                            $content = $_POST['content'];
+                            $image_url = $_POST['image_url'];
+
+                            // Check if a new image file is uploaded
+                            if ($_FILES['new_image']['error'] == 0) {
+                                $target_dir = "uploads/";
+                                $target_file = $target_dir . basename($_FILES['new_image']['name']);
+                                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+                                // Check file size
+                                if ($_FILES['new_image']['size'] > 500000) {
+                                    echo '<div class="alert alert-danger" role="alert">Sorry, your file is too large.</div>';
+                                } else {
+                                    // Upload the file
+                                    if (move_uploaded_file($_FILES['new_image']['tmp_name'], $target_file)) {
+                                        $image_url = $target_file; // Update the image URL
+                                    } else {
+                                        echo '<div class="alert alert-danger" role="alert">Sorry, there was an error uploading your file.</div>';
+                                    }
+                                }
+                            }
+
+                            // Update query
+                            $sql = "UPDATE about SET title='$title', subtitle='$subtitle', content='$content', image_url='$image_url' WHERE about_id='$about_id'";
+
+                            if (mysqli_query($conn, $sql)) {
+                                echo '<div class="alert alert-success" role="alert">About Us updated successfully!</div>';
+                            } else {
+                                echo '<div class="alert alert-danger" role="alert">Error updating About Us: ' . mysqli_error($conn) . '</div>';
+                            }
+                        }
+
+                        // Fetch data for the form
+                        $about_id = $_GET['id'];
+                        $sql_select = "SELECT * FROM about WHERE about_id='$about_id'";
+                        $result = mysqli_query($conn, $sql_select);
+                        $row = mysqli_fetch_assoc($result);
+                        ?>
+                        <form method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="about_id" value="<?php echo $row['about_id']; ?>">
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" class="form-control" id="title" name="title" value="<?php echo $row['title']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="subtitle">Subtitle:</label>
+                                <input type="text" class="form-control" id="subtitle" name="subtitle" value="<?php echo $row['subtitle']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content:</label>
+                                <textarea class="form-control" id="content" name="content"><?php echo $row['content']; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image_url">Current Image:</label><br>
+                                <img src="../images/<?php echo $row['image_url']; ?>" class="img-thumbnail" width="200" alt="Current Image">
+                            </div>
+                            <div class="form-group">
+                                <label for="new_image">New Image:</label>
+                                <input type="file" class="form-control-file" id="new_image" name="new_image">
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="update">Update</button>
+                        </form>
                     </div>
                 </div>
-                <!-- Current End -->
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">

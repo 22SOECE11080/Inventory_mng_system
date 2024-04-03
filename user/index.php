@@ -19,11 +19,8 @@
     <!-- @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"); -->
 
     <!-- bootstrap links -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,23 +68,23 @@
 
     <!-- for validation of forms -->
     <script>
-        $(document).ready(function () {
-            $.validator.addMethod("fnregex", function (value, element) {
+        $(document).ready(function() {
+            $.validator.addMethod("fnregex", function(value, element) {
                 var regex = /^[a-zA-Z ]+$/;
                 return regex.test(value);
             }, "Fullname must contain only letters");
 
-            $.validator.addMethod("emregex", function (value, element) {
+            $.validator.addMethod("emregex", function(value, element) {
                 var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
             }, "Email must contain specific letters");
 
-            $.validator.addMethod("subregex", function (value, element) {
+            $.validator.addMethod("subregex", function(value, element) {
                 var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
             });
 
-            $.validator.addMethod("descregex", function (value, element) {
+            $.validator.addMethod("descregex", function(value, element) {
                 var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
             });
@@ -141,7 +138,7 @@
                         maxlength: "Discription must contain 200 characters",
                     }
                 },
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     if (element.attr('name') === "fn") {
                         $('#fn_err').html(error);
                     }
@@ -191,13 +188,11 @@
                     <!-- Add more slides as needed -->
                 </div>
                 <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -206,42 +201,59 @@
                     <div class="container-fluid section-bg" data-aos="fade-up">
                         <h1 class="text-center p-2 fs-1 fw-bold">About Us</h1>
                         <div class="head"></div>
-                        <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit<br>Vel quidem
-                            dolorem
-                            consectetur laudantium eligendi.</p>
-                        <div class="row g-5" data-aos="fade-up">
-                            <div class="col-sm-5">
-                                <img src="image1/p7.webp" class="d-block w-100 image-fluid" alt="image 1"
-                                    style="border-radius: 50px;">
-                            </div>
-                            <div class="col-sm-7 x-2 border-start border-primary border-3">
-                                <h1>We provide Best Quality Service Ever</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id magnam placeat rerum
-                                    quibusdam
-                                    temporibus ea, dolorem impedit quaerat voluptatem libero sunt cupiditate ratione
-                                    odio
-                                    eligendi nihil sint reiciendis, nesciunt vel?</p>
-                                <a href=""><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Learn
-                                        More</button></a>
-                            </div>
-                        </div>
+                        <p class="text-center p-2">The Website Missions ans Goals.</p>
 
-                        <div class="row g-5 my-2" data-aos="fade-up">
-                            <div class="col-sm-7 x-2 border-end border-primary border-3">
-                                <h1>We provide Best Quality Service Ever</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id magnam placeat rerum
-                                    quibusdam
-                                    temporibus ea, dolorem impedit quaerat voluptatem libero sunt cupiditate ratione
-                                    odio
-                                    eligendi nihil sint reiciendis, nesciunt vel?</p>
-                                <a href=""><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Learn
-                                        More</button></a>
+                        <?php
+                        // SQL query to fetch data
+                        $sql = "SELECT * FROM about WHERE about_id = 1"; // Change 1 to the desired ID
+                        $result = mysqli_query($conn, $sql);
+
+                        // Check if there is a row in the result set
+                        if (mysqli_num_rows($result) > 0) {
+                            // Fetch the row
+                            $row = mysqli_fetch_assoc($result);
+                        ?>
+                            <div class="row g-5 mb-5" data-aos="fade-up">
+                                <div class="col-sm-5">
+                                    <img src="../images/<?= $row["image_url"] ?>" class="d-block w-100 image-fluid" alt="image" style="border-radius: 50px;">
+                                </div>
+                                <div class="col-sm-7 x-2 border-start border-primary border-3">
+                                    <h1><?= $row["title"] ?></h1>
+                                    <p><?= $row["content"] ?></p>
+                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                </div>
                             </div>
-                            <div class="col-sm-5">
-                                <img src="image1/p7.webp" class="d-block w-100 image-fluid" alt="image 1"
-                                    style="border-radius: 50px;">
+                        <?php
+                        } else {
+                            echo '<p class="text-center">No data available for the specified ID.</p>';
+                        }
+                        ?>
+
+                        <?php
+                        // SQL query to fetch data
+                        $sql = "SELECT * FROM about WHERE about_id = 2"; // Change 1 to the desired ID
+                        $result = mysqli_query($conn, $sql);
+
+                        // Check if there is a row in the result set
+                        if (mysqli_num_rows($result) > 0) {
+                            // Fetch the row
+                            $row = mysqli_fetch_assoc($result);
+                        ?>
+                            <div class="row g-5 mb-5" data-aos="fade-up">
+                                <div class="col-sm-7">
+                                    <h1><?= $row["title"] ?></h1>
+                                    <p><?= $row["content"] ?></p>
+                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                </div>
+                                <div class="col-sm-5 x-2 border-start border-primary border-3">
+                                    <img src="../images/<?= $row["image_url"] ?>" class="d-block w-100 image-fluid" alt="image" style="border-radius: 50px;">
+                                </div>
                             </div>
-                        </div>
+                        <?php
+                        } else {
+                            echo '<p class="text-center">No data available for the specified ID.</p>';
+                        }
+                        ?>
                     </div>
                 </section>
 
@@ -249,52 +261,36 @@
                     <div class="container-fluid" data-aos="flip-up">
                         <h1 class="text-center fs-1 fw-bold">Our Services</h1>
                         <div class="head"></div>
-                        <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-                        <div class="row" >
-                            <div class="col-sm-3" data-aos="fade-up">
-                                <div class="card text-center section-bg pb-2 card1">
-                                    <div class="card-body">
-                                        <i class="bi bi-subtract fs-1 card1"></i>
-                                        <h3 class="card-title">Integrity</h3>
-                                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                        <a href=""><button type="button"
-                                                class="btn btn-outline-primary btn-lg">Explore-></button></a>
+                        <p class="text-center p-2">The Best services that are in our company.</p>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+                            <?php
+                            // SQL query to fetch data
+                            $sql = "SELECT * FROM services";
+                            $result = mysqli_query($conn, $sql);
+
+                            // Check if there are rows in the result set
+                            if (mysqli_num_rows($result) > 0) {
+                                // Loop through each row and display card data
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                    <div class="col" data-aos="fade-up">
+                                        <div class="card text-center section-bg pb-2 card1">
+                                            <div class="card-body">
+                                                <i class="<?= $row['icon_class'] ?> fs-1 card1"></i>
+                                                <h3 class="card-title"><?= $row['heading'] ?></h3>
+                                                <p class="lead"><?= $row['content'] ?></p>
+                                                <a href="<?= $row['link'] ?>" class="btn btn-outline-primary btn-lg">Explore-></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3" data-aos="fade-up">
-                                <div class="card text-center section-bg pb-2 card1">
-                                    <div class="card-body">
-                                        <i class="bi bi-bookmarks-fill fs-1"></i>
-                                        <h3 class="card-title">Scalablity</h3>
-                                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                        <a href=""><button type="button"
-                                                class="btn btn-outline-primary btn-lg">Explore-></button></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3" data-aos="fade-up">
-                                <div class="card text-center section-bg pb-2 card1">
-                                    <div class="card-body">
-                                        <i class="bi bi-emoji-sunglasses-fill fs-1"></i>
-                                        <h3 class="card-title">Best Service</h3>
-                                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                        <a href=""><button type="button"
-                                                class="btn btn-outline-primary btn-lg">Explore-></button></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3" data-aos="fade-up">
-                                <div class="card text-center section-bg pb-2 card1">
-                                    <div class="card-body">
-                                        <i class="bi bi-emoji-sunglasses-fill fs-1"></i>
-                                        <h3 class="card-title">Best Service</h3>
-                                        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                        <a href=""><button type="button"
-                                                class="btn btn-outline-primary btn-lg">Explore-></button></a>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                }
+                            } else {
+                                echo '<p class="text-center">No services available.</p>';
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </section>
@@ -303,62 +299,41 @@
                     <div class="container-fluid section-bg">
                         <h1 class="text-center fs-1 fw-bold">Our Team</h1>
                         <div class="head"></div>
-                        <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <p class="text-center p-2">The information about our team.</p>
                         <div class="row">
-                            <div class="col-sm-4" data-aos="fade-up">
-                                <div class="card text-center border-dark border-1">
-                                    <img src="image1/p1.jpeg" class="image-fluid rounded border-dark border-1"
-                                        alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Person1</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make
-                                            up the
-                                            bulk of the card's content.</p>
-                                        <p class="socials">
-                                            <a href=""> <i class="bi bi-twitter text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-linkedin text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-github text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-instagram text-dark mx-2 fs-4"></i></a>
-                                        </p>
+
+                            <?php
+                            // SQL query to fetch team member data
+                            $sql = "SELECT * FROM team";
+                            $result = mysqli_query($conn, $sql);
+
+                            // Check if there are rows in the result set
+                            if (mysqli_num_rows($result) > 0) {
+                                // Loop through each row and display team member card
+                                while ($row = mysqli_fetch_assoc($result)) {
+                            ?>
+                                    <div class="col-sm-4" data-aos="fade-up">
+                                        <div class="card text-center border-dark border-1">
+                                            <img src="../images/<?= $row['image_url'] ?>" class="image-fluid rounded border-dark border-1" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?= $row['M_name'] ?></h5>
+                                                <p class="card-text"><?= $row['M_info'] ?></p>
+                                                <p class="socials">
+                                                    <a href="<?= $row['link1'] ?>"> <i class="bi bi-twitter text-dark mx-2 fs-4"></i></a>
+                                                    <a href="<?= $row['link2'] ?>"><i class="bi bi-linkedin text-dark mx-2 fs-4"></i></a>
+                                                    <a href="<?= $row['link3'] ?>"><i class="bi bi-github text-dark mx-2 fs-4"></i></a>
+                                                    <a href="<?= $row['link4'] ?>"><i class="bi bi-instagram text-dark mx-2 fs-4"></i></a>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" data-aos="fade-up">
-                                <div class="card text-center border-dark border-1">
-                                    <img src="image1/p1.jpeg" class="image-fluid rounded border-dark border-1"
-                                        alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Person2</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make
-                                            up the
-                                            bulk of the card's content.</p>
-                                        <p class="socials">
-                                            <a href=""> <i class="bi bi-twitter text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-linkedin text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-github text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-instagram text-dark mx-2 fs-4"></i></a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" data-aos="fade-up">
-                                <div class="card text-center border-dark border-1">
-                                    <img src="image1/p1.jpeg" class="image-fluid rounded border-primary border-1"
-                                        alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Person3</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make
-                                            up the
-                                            bulk of the card's content.</p>
-                                        <p class="socials">
-                                            <a href=""> <i class="bi bi-twitter text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-linkedin text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-github text-dark mx-2 fs-4"></i></a>
-                                            <a href=""><i class="bi bi-instagram text-dark mx-2 fs-4"></i></a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                }
+                            } else {
+                                echo '<p class="text-center">No team members available.</p>';
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </section>
@@ -367,71 +342,68 @@
                     <div class="container">
                         <h1 class="text-center fs-1 fw-bold">Contact Us</h1>
                         <div class="head"></div>
-                        <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <p class="text-center p-2">The contact Form.</p>
                         <div class="row g-5" data-aos="fade-up">
                             <div class="col-sm-6">
-                                <div class="row g-3 p-3 ">
-                                    <div class="col-sm-6">
-                                        <div class="card section-bg card1">
-                                            <div class="card-body">
-                                                <i class="bi bi-geo-alt-fill fs-2"></i>
-                                                <h2 class="card-title">Address</h2>
-                                                <p class="card-text">R.K University, <br> Tramba , Rajkot - 360001.
-                                                </p>
+                                <?php
+                                $sql = "SELECT * FROM contact";
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    // Counter to track the number of cards
+                                    $cardCount = 0;
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        // Increment the card count for each iteration
+                                        $cardCount++;
+
+                                        // Start a new row for every second card
+                                        if ($cardCount % 2 === 1) {
+                                            echo '<div class="row g-3 p-3">';
+                                        }
+                                ?>
+                                        <div class="col-sm-6">
+                                            <div class="card section-bg card1">
+                                                <div class="card-body">
+                                                    <i class="<?= $row['icons'] ?> fs-2"></i>
+                                                    <h2 class="card-title"><?= $row['title'] ?></h2>
+                                                    <p class="card-text"><?= $row['content'] ?></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card section-bg card1">
-                                            <div class="card-body">
-                                                <i class="bi bi-telephone-fill fs-2"></i>
-                                                <h2 class="card-title">Contact Us.</h2>
-                                                <p class="card-text">+91 99999 88888 <br> +91 88888 99999</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row g-3 p-3" data-aos="fade-up">
-                                    <div class="col-sm-6">
-                                        <div class="card section-bg card1">
-                                            <div class="card-body">
-                                                <i class="bi bi-envelope-fill fs-2"></i>
-                                                <h2 class="card-title">Email Us.</h2>
-                                                <p class="card-text">abc@rku.ac.in <br> pqr@rku.ac.in </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="card section-bg card1">
-                                            <div class="card-body">
-                                                <i class="bi bi-clock-fill fs-2"></i>
-                                                <h2 class="card-title">Open Hours</h2>
-                                                <p class="card-text">Monday-Friday <br> 9:00 AM to 5:00 PM</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                        // Close the row for every second card
+                                        if ($cardCount % 2 === 0) {
+                                            echo '</div>'; // Close the row
+                                        }
+                                    }
+
+                                    // Close the row if the total cards is odd
+                                    if ($cardCount % 2 === 1) {
+                                        echo '</div>'; // Close the row
+                                    }
+                                } else {
+                                    echo '<p class="text-center">No contact information available.</p>';
+                                }
+                                ?>
                             </div>
+
+
                             <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
                                 <form class="p-5 my-5 w-100" id="form1">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="fn" aria-describedby="emailHelp"
-                                            name="fn" placeholder="Your Name">
+                                        <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
                                         <span id="fn_err"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="email" class="form-control" id="em" aria-describedby="emailHelp"
-                                            name="em" placeholder="Your Email">
+                                        <input type="email" class="form-control" id="em" aria-describedby="emailHelp" name="em" placeholder="Your Email">
                                         <span id="em_err"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="sub" aria-describedby="emailHelp"
-                                            name="sub" placeholder="Subject">
+                                        <input type="text" class="form-control" id="sub" aria-describedby="emailHelp" name="sub" placeholder="Subject">
                                         <span id="sub_err"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <textarea class="form-control" id="desc" rows="3" name="desc"
-                                            placeholder="Descepration"></textarea>
+                                        <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
                                         <span id="desc_err"></span>
                                     </div>
                                     <button type="submit" class="btn btn-success">Send Message</button>
@@ -440,6 +412,7 @@
                         </div>
                     </div>
                 </section>
+
     </main>
 
     <?php include('footer.php') ?>

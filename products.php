@@ -83,179 +83,46 @@
                 <h1 class="text-center fs-1 fw-bold">Products</h1>
                 <p class="text-center p-2">The top Products in the company.</p>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <a href="login.html" class="text-decoration-none">
-                            <div class="card shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 1</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                    <?php
+                    // Get the agency ID from the URL query parameter
+                    if (isset($_GET['id'])) {
+                        $agency_id = $_GET['id'];
 
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a href="login.html" class="text-decoration-none">
-                            <div class="card shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top image-fluid" height="340px" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 1</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                        // Execute the SQL query to get products of the selected agency
+                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name
+                        FROM products
+                        INNER JOIN agency ON products.a_id = agency.a_id
+                        WHERE agency.a_id = $agency_id";
+                        $result = mysqli_query($conn, $sql);
 
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
+                        // Check if there are any results
+                        if (mysqli_num_rows($result) > 0) {
+                            // Output data of each row
+                            while ($row = mysqli_fetch_assoc($result)) {
+                    ?>
+                                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                                    <div class="card">
+                                        <img src="images/<?php echo $row['p_image']; ?>" class="card-img-top" alt="Product Image">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
+                                            <p class="card-text">Price: $<?php echo $row['price']; ?></p>
+                                            <p class="card-text">Agency: <?php echo $row['a_name']; ?></p>
+                                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 p-3 ">
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="card section-bg card1">
-                                    <img src="images/p1.jpeg" class="card-img-top" alt="Image">
-                                    <div class="card-body d-flex justify-content-center align-items-center flex-column">
-                                        <h5 class="card-title">phone</h5>
-                                        <p class="card-text">Your text content goes here.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                    } else {
+                        echo "Agency ID not provided.";
+                    }
+                    ?>
                 </div>
             </div>
         </section>
-
-        <div class="container my-5">
-            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                    <h2 class="display-4 fw-bold lh-1 text-body-emphasis text-primary">Here we have the top aggencies
-                        with us.</h2>
-                    <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the
-                        world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
-                        responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <a href="login.html"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" fdprocessedid="hgme3">Explore</button></a>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg border-2 border-dark">
-                    <img class="rounded-lg-3 image-fluid" src="images/pexels-lukas-669612.jpg" alt="" width="720">
-                </div>
-            </div>
-        </div>
 
     </main>
 

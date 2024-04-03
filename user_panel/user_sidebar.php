@@ -15,7 +15,7 @@ $arr_url = explode("/", $url);
                 <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
             </div>
             <div class="ms-3">
-                <h6 class="mb-0"><?php echo $userData['admin_username']; ?></h6>
+                <h6 class="mb-0"><?php echo $userData['agency_username']; ?></h6>
                 <span>Admin</span>
             </div>
         </div>
@@ -23,21 +23,20 @@ $arr_url = explode("/", $url);
             <a href="index.php" class="nav-item nav-link <?php if ($arr_url[3] == "index.php") {
                                                                 echo "active";
                                                             } ?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            <a href="agency_request.php" class="nav-item nav-link <?php if ($arr_url[3] == "agency_request.php") {
-                                                                        echo "active";
-                                                                    } ?>"><i class="fa fa-tachometer-alt me-2"></i>Agency Requests</a>
-            <a href="retailers.php" class="nav-item nav-link <?php if ($arr_url[3] == "retailers.php") {
-                                                                    echo "active";
-                                                                } ?>"><i class="fa fa-tachometer-alt me-2"></i>Retailers</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle <?php if ($arr_url[3] == "add.php") {
+                                                                echo "active";
+                                                            } ?>" data-bs-toggle="dropdown"><i class="fa fa-box me-2"></i>Stock</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="add.php" class="dropdown-item">Add New Stock</a>
+                </div>
+            </div>
             <a href="sell.php" class="nav-item nav-link <?php if ($arr_url[3] == "sell.php") {
                                                             echo "active";
                                                         } ?>"><i class="fa fa-shopping-cart me-2"></i>Sell</a>
             <a href="report.php" class="nav-item nav-link <?php if ($arr_url[3] == "report.php") {
                                                                 echo "active";
                                                             } ?>"><i class="bi bi-receipt-cutoff me-2"></i></i>Report</a>
-            <a href="dynamic.php" class="nav-item nav-link <?php if ($arr_url[3] == "dynamic.php") {
-                                                                echo "active";
-                                                            } ?>"><i class="bi bi-receipt-cutoff me-2"></i></i>Dynamic</a>
         </div>
     </nav>
 </div>

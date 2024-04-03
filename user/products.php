@@ -7,8 +7,28 @@ include_once("include/conn.php")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Document</title>
+
+    <!-- aos links -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- jquery links -->
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script src="jquery/jquery.validate.js"></script>
+
+    <link rel="stylesheet" href="guest.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"); -->
+
+    <!-- bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -47,22 +67,12 @@ include_once("include/conn.php")
             font-size: 14px;
             padding-bottom: 50px;
         }
-
-        .card:hover {
-            transform: scale(1.05);
-            /* Increase the scale to 105% on hover */
-            transition: transform 1s ease;
-            /* Add a smooth transition effect */
-        }
     </style>
 </head>
 
 <body>
-    <?php
-    include_once('include/conn.php');
-    include('header.php');
-    ?>
-
+    <?php include('header.php');
+    include_once('include/conn.php'); ?>
     <main>
         <section>
             <div class="container bg-light">
@@ -75,10 +85,10 @@ include_once("include/conn.php")
                         $agency_id = $_GET['id'];
 
                         // Execute the SQL query to get products of the selected agency
-                        $sql = "SELECT products.p_id, products.p_name, products.price, products.discount, products.p_image, agency.a_name
-                    FROM products
-                    INNER JOIN agency ON products.a_id = agency.a_id
-                    WHERE agency.a_id = $agency_id";
+                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name
+                        FROM products
+                        INNER JOIN agency ON products.a_id = agency.a_id
+                        WHERE agency.a_id = $agency_id";
                         $result = mysqli_query($conn, $sql);
 
                         // Check if there are any results
@@ -88,12 +98,11 @@ include_once("include/conn.php")
                     ?>
                                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                                     <div class="card">
-                                        <img src="<?php echo $row['p_image']; ?>" class="card-img-top" alt="Product Image">
+                                        <img src="../images/<?php echo $row['p_image']; ?>" class="card-img-top" alt="Product Image">
                                         <div class="card-body">
                                             <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
                                             <p class="card-text">Price: $<?php echo $row['price']; ?></p>
                                             <p class="card-text">Agency: <?php echo $row['a_name']; ?></p>
-                                            <p class="card-text">Discount: <?php echo $row['discount']; ?>%</p>
                                             <button class="btn btn-primary btn-sm">Add to Cart</button>
                                         </div>
                                     </div>

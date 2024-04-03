@@ -1,7 +1,8 @@
 <?php
 $login = false;
 $showError = false;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["username"]) && isset($_POST["password"])) {
     include 'dbcon.php';
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -10,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "SELECT * FROM admin WHERE admin_username = '$username' AND Password = '$password'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
+
     if ($num == 1) {
         $login = true;
         session_start();
@@ -21,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $showError = "Invalid Credentials";
     }
 }
+
 
 ?>
 

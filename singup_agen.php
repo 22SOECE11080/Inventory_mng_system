@@ -3,9 +3,9 @@ session_start();
 
 include_once ('include/conn.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['submit'])) {
     // Retrieve data from the form
-    $a_name = $_POST['first_name'] . ' ' . $_POST['last_name'];
+    $a_name = $_POST['agency_name']; // Corrected variable name
     $gst_number = $_POST['gst_number'];
     $phone_number = $_POST['phone_number'];
     $username = $_POST['email']; // Assuming email as username
@@ -13,16 +13,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $state = $_POST['state'];
     $city = $_POST['city'];
     $pincode = $_POST['pincode'];
-    $status = 'inactive'; // Default status
+    $status = 'Inactive'; // Default status
     $password = $_POST['password']; // You can set this as needed
+    $token = uniqid() . uniqid();
 
-    // Simple insert query
-    $sql = "INSERT INTO agency (a_name, gst_number, phone_number, username, country, state, city, pincode, status, password) VALUES ('$a_name', '$gst_number', '$phone_number', '$username', '$country', '$state', '$city', '$pincode', '$status', '$password')";
+    // Check if the email already exists
+    $check_sql = "SELECT * FROM agency WHERE agency_username = '$username'"; // Changed email to agency_username
+    $result = $conn->query($check_sql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record inserted successfully!";
+    if ($result === FALSE) {
+        echo "Error checking email: " . $conn->error;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        if ($result->num_rows > 0) {
+            ?>
+            <script>
+                alert("Username already exists. Please use a different username.");
+            </script>
+            <?php
+        }else{
+             // Simple insert query
+            $sql = "INSERT INTO agency (a_name, gst_number, phone_number, agency_username, country, state, city, pincode, status, password, token) VALUES ('$a_name', '$gst_number', '$phone_number', '$username', '$country', '$state', '$city', '$pincode', '$status', '$password', '$token')";
+
+            if ($conn->query($sql) === TRUE) {
+                // echo "New record inserted successfully!";
+            } else {
+                // echo "Error: " . $sql . "<br>" . $conn->error;
+             }
+        }
     }
 }
 ?>
@@ -256,7 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="text" class="form-control" id="pincode" name="pincode" placeholder="Pincode">
                                 <span id="pincode_err"></span>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                            <button type="submit" class="btn btn-primary" name="submit">Sign Up</button>
                         </form>
                     </div>
                 </div>

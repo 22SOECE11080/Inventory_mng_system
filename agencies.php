@@ -82,91 +82,32 @@
                 <h1 class="text-center fs-1 fw-bold">Top Agencies</h1>
                 <p class="text-center p-2">The top agencies in the company.</p>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 1</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                    <?php
+                    $sql = "SELECT * FROM agency";
+                    $result = $conn->query($sql);
 
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 2</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $description = isset($row["description"]) ? $row["description"] : "Description not available";
+                            echo '<div class="col-sm-4">
+                                    <a href="products.php?id=' . $row["a_id"] . '" class="text-decoration-none">
+                                        <div class="card border-2 border-dark shadow-lg">
+                                            <img src="images/p6.webp" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h3>' . $row["a_name"] . '</h3>
+                                                <p class="card-text">' . $description . '
+                                                    <br><span><b>View Products --></b></span>.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>';
+                        }
+                    } else {
+                        echo "No agencies found";
+                    }
 
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 3</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 4</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 5</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc..
-                                        <br><span><b>View Products --></b></span>.
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="products.php" class="text-decoration-none">
-                            <div class="card border-2 border-dark shadow-lg">
-                                <img src="images/p6.webp" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h3>Agency 6</h3>
-                                    <p class="card-text">products like Phones, Laptop, Computer, Airpords, Air conditions, etc...</p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
+                    ?>
                 </div>
             </div>
         </section>

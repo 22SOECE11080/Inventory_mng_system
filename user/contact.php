@@ -167,7 +167,7 @@
                 <div class="container">
                     <h1 class="text-center fs-1 fw-bold">Contact Us</h1>
                     <div class="head"></div>
-                    <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    <p class="text-center p-2">The contact Form.</p>
                     <div class="row g-5" data-aos="fade-up">
                         <div class="col-sm-6">
                             <div class="row g-3 p-3 ">

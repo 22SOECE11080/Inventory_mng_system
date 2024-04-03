@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,6 +72,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php include('header.php');
     include_once('include/conn.php'); ?>
@@ -87,13 +89,14 @@
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+                            $description = isset($row["description"]) ? $row["description"] : "Description not available";
                             echo '<div class="col-sm-4">
                                     <a href="products.php?id='. $row["a_id"] . '" class="text-decoration-none">
                                         <div class="card border-2 border-dark shadow-lg">
                                             <img src="image1/p6.webp" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h3>' . $row["a_name"] . '</h3>
-                                                <p class="card-text">' . $row["description"] . '
+                                                <p class="card-text">' . $description . '
                                                     <br><span><b>View Products --></b></span>.
                                                 </p>
                                             </div>
@@ -104,6 +107,7 @@
                     } else {
                         echo "No agencies found";
                     }
+                    
                     ?>
                 </div>
             </div>

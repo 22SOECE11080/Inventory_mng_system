@@ -1,6 +1,4 @@
-<?php
-include_once("include/conn.php");
-?>
+<?php include_once("include/conn.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,25 +7,27 @@ include_once("include/conn.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- aos links -->
+    <!-- AOS links -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <!-- jquery links -->
-    <script src="jquery/jquery-3.7.1.min.js"></script>
-    <script src="jquery/jquery.validate.js"></script>
+    <!-- jQuery links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-    <link rel="stylesheet" href="guest.css">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"); -->
-
-    <!-- bootstrap links -->
+    <!-- Bootstrap links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="guest.css">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         body {
@@ -46,7 +46,6 @@ include_once("include/conn.php");
 
         .section-bg {
             background-color: #f3f5fa;
-            /* background-color: #f6f6f6; */
         }
 
         .head {
@@ -71,7 +70,8 @@ include_once("include/conn.php");
 </head>
 
 <body>
-    <?php include('header.php')  ?>
+    <?php include('header.php');
+    include_once('include/conn.php'); ?>
     <br>
     <main>
         <section>
@@ -80,13 +80,13 @@ include_once("include/conn.php");
                 <p class="text-center p-2">The top Offers in the company.</p>
                 <div class="row">
                     <?php
-                    // Assuming you have your database connection established already
+                    // Fetch products grouped by agency name
+                    $sql = "SELECT agency.a_id, products.p_id, products.p_name, products.price, products.quantity, offer.discount, products.p_image, agency.a_name
+                    FROM products
+                    INNER JOIN agency ON products.a_id = agency.a_id
+                    LEFT JOIN offer ON products.p_id = offer.p_id
+                    ORDER BY agency.a_name";
 
-                    // Execute the SQL query
-                    $sql = "SELECT products.p_id, products.p_name, products.price, products.quantity, products.discount, products.p_image, agency.a_name
-                FROM products
-                INNER JOIN agency ON products.a_id = agency.a_id
-                ORDER BY agency.a_name";
                     $result = mysqli_query($conn, $sql);
 
                     // Check if there are any results
@@ -97,7 +97,8 @@ include_once("include/conn.php");
                         // Group products by agency name
                         while ($row = mysqli_fetch_assoc($result)) {
                             $agencyName = $row['a_name'];
-                            if (!array_key_exists($agencyName, $groupedProducts)) {
+                            $agencyid = $row['a_id'];
+                            if (!isset($groupedProducts[$agencyName])) {
                                 $groupedProducts[$agencyName] = array();
                             }
                             $groupedProducts[$agencyName][] = $row;
@@ -106,31 +107,36 @@ include_once("include/conn.php");
                         // Output data for each agency
                         foreach ($groupedProducts as $agencyName => $products) {
                     ?>
-                            <div class="col-sm-4 col-md-4 mb-4">
+                            <div class="col-sm-6 col-md-4 mb-4">
                                 <div class="card">
                                     <div class="card-header"><?php echo $agencyName; ?></div>
                                     <div class="card-body">
-                                        <div class="row">
+                                        <div class="row row-cols-1 row-cols-md-2 g-4">
                                             <?php
-                                            $count = 0;
                                             foreach ($products as $product) {
-                                                if ($count % 2 == 0 && $count > 0) {
-                                                    echo '</div><div class="row">';
-                                                }
                                             ?>
-                                                <div class="col-sm-6">
+                                                <div class="col">
                                                     <div class="card">
-                                                        <img src="image1/p1.jpeg" class="card-img-top image-fluid" alt="Product Image">
+                                                        <img src="images/<?php echo $product['p_image']; ?>" class="card-img-top image-fluid" alt="Product Image">
                                                         <div class="card-body">
                                                             <h5 class="card-title"><?php echo $product['p_name']; ?></h5>
                                                             <p class="card-text">Price: <?php echo $product['price']; ?></p>
-                                                            <p class="card-text">Discount: <?php echo $product['discount']; ?></p>
-                                                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                                                            <p class="card-text">Discount: <?php echo $product['discount']; ?>%</p>
+                                                            <form action="offers.php" method="POST">
+                                                                <input type="hidden" name="product_id" value="<?php echo $product['p_id']; ?>">
+                                                                <input type="hidden" name="agency_name" value="<?php echo $agencyName; ?>">
+                                                                <input type="hidden" name="agency_id" value="<?php echo $agencyid; ?>">
+                                                                <input type="hidden" name="product_image" value="<?php echo $product['p_image']; ?>">
+                                                                <input type="hidden" name="product_name" value="<?php echo $product['p_name']; ?>">
+                                                                <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
+                                                                <input type="hidden" name="product_dis" value="<?php echo $product['discount']; ?>">
+                                                                <button type="submit" class="btn btn-primary btn-sm" name="add_to_cart">Add to Cart</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             <?php
-                                                $count++;
+
                                             }
                                             ?>
                                         </div>
@@ -143,54 +149,60 @@ include_once("include/conn.php");
                         echo "0 results";
                     }
 
-                    // Close the database connection
-                    mysqli_close($conn);
+
                     ?>
                 </div>
             </div>
-
-
-            </div>
         </section>
-        <div class="container my-5">
-            <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-                <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                    <h2 class="display-4 fw-bold lh-1 text-body-emphasis text-primary">Here we have the top aggencies
-                        with us.</h2>
-                    <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the
-                        world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
-                        responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <a href="login.html"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" fdprocessedid="hgme3">Explore</button></a>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg border-2 border-dark">
-                    <img class="rounded-lg-3 image-fluid" src="image1/pexels-lukas-669612.jpg" alt="" width="720">
-                </div>
-            </div>
-        </div>
-
+        
     </main>
 
-    <?php include('footer.php') ?>
-
+    <?php include('footer.php'); ?>
 </body>
 
 </html>
-<?php 
-// Fetch products from the database
-$sql = "SELECT * FROM products";
-$result = mysqli_query($conn, $sql);
-$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-// Handle adding items to the cart
-if(isset($_POST['add_to_cart']) && isset($_POST['product_id'])) {
-    $productId = $_POST['product_id'];
-    // Add the product ID to the cart array in session
-    $_SESSION['cart'][] = $productId;
-    // Redirect to prevent form resubmission
-    header("Location: index.php");
-    exit;
+<?php
+
+@include 'config.php';
+
+$message = array(); // Initialize the message array
+
+if (isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['product_id'];
+    $product_img = $_POST['product_image'];
+    $product_name = $_POST['product_name'];
+    $product_ppp = $_POST['product_price'];
+    $agency_name = $_POST['agency_name'];
+    $agency_id = $_POST['agency_id'];
+    $product_dis = $_POST['product_dis'];
+
+
+    // Check if the product is already in the cart
+    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE p_name = '$product_name'");
+    if (mysqli_num_rows($select_cart) > 0) {
+?>
+        <script>
+            alert('Product is already in the cart');
+        </script>
+        <?php
+    } else {
+        // If the product is not in the cart, insert it into the cart
+        $insert_product = mysqli_query($conn, "INSERT INTO `cart` (p_image, p_name, a_name, price, quantity, discount, p_id, a_id) VALUES ('$product_img', '$product_name', '$agency_name', '$product_ppp', 1, '$product_dis', '$product_id','$agency_id')");
+        if ($insert_product) {
+        ?>
+            <script>
+                alert("added in cart");
+            </script>
+        <?php
+        } else {
+        ?>
+            <script>
+                alert('Failed to add the product to the cart');
+            </script>
+<?php
+        }
+    }
 }
+
 ?>

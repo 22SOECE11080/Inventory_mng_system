@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Include PHPMailer autoloader
+require '../PHPMailer/PHPMailer.php';
+require '../PHPMailer/Exception.php';
+require '../PHPMailer/SMTP.php'; // Include SMTP support
+
 if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
     header("location: login.php");
     exit(); // Ensure no further code execution after redirection
@@ -8,46 +16,18 @@ if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
 
 include 'dbcon.php';
 
-if (isset($_GET['id'])) {
-    $agencyId = $_GET['id'];
+// Debugging: Check the value of ID parameter
 
-    // Check if the ID is valid (numeric and exists in the database)
-    if (!is_numeric($agencyId)) {
-        echo "Invalid ID provided.";
-        exit();
-    }
-
-    $checkQuery = "SELECT * FROM agency WHERE a_id = $agencyId";
-    $checkResult = $conn->query($checkQuery);
-
-    if ($checkResult->num_rows > 0) {
-        // Delete the agency based on the ID
-        $deleteQuery = "DELETE FROM agency WHERE a_id = $agencyId";
-        $result = $conn->query($deleteQuery);
-
-        if ($result) {
-            // Redirect back to agencies page after deletion
-            header("Location: agency_request.php");
-            exit();
-        } else {
-            echo "Error deleting agency: " . $conn->error;
-        }
-    } else {
-        echo "Agency with ID $agencyId not found.";
-    }
-} else {
-    echo "Agency ID not provided.";
-}
 
 $username = $_SESSION['username'];
 
 $query = "SELECT * FROM admin WHERE admin_username = '$username'";
 $result = $conn->query($query);
 
-$query3 = "SELECT * FROM agency where status = 'inactive'";
+$query3 = "SELECT * FROM agency where status = 'Inactive'";
 $result3 = $conn->query($query3);
 
-$query4 = "SELECT * FROM agency Where status = 'active' ";
+$query4 = "SELECT * FROM agency Where status = 'Active' ";
 $result4 = $conn->query($query4);
 
 if ($result->num_rows > 0) {
@@ -99,13 +79,13 @@ if ($result->num_rows > 0) {
             <!-- Spinner End -->
 
             <!-- Sidebar Start -->
-            <?php include_once ('admin_sidebar.php') ?>
+            <?php include_once('admin_sidebar.php') ?>
             <!-- Sidebar End -->
 
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <?php include_once ('admin_nav.php') ?>
+                <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
 
                 <!-- Recent Sales Start -->
@@ -138,7 +118,7 @@ if ($result->num_rows > 0) {
                                             <td><?php echo $row['gst_number']; ?></td>
                                             <td><?php echo $row['phone_number']; ?></td>
                                             <td><?php echo $row['city']; ?></td>
-                                            <td><a href="agency_request.php?id=<?php echo $row['a_id']; ?>" class="btn btn-primary">Approve</a></td>
+                                            <td><a href="sample.php?id=<?php echo $row['a_id']; ?>" class="btn btn-primary">Approve</a></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -183,7 +163,7 @@ if ($result->num_rows > 0) {
                                                 <a href="edit_agency.php?id=<?php echo $row['a_id']; ?>" class="btn btn-primary">Edit</a>
                                             </td>
                                             <td>
-                                                <a href="delete_agency.php?id=<?php echo $row['a_id']; ?>" class="btn btn-danger">Delete</a>
+                                                <a href="agency_request.php?id=<?php echo $row['a_id']; ?>" class="btn btn-danger">Delete</a>
                                             </td> <!-- Added Edit and Delete buttons -->
                                         </tr>
                                     <?php } ?>

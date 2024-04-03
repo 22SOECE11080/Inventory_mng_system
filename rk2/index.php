@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
+if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true || !isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
     exit;
 }
@@ -96,13 +96,13 @@ if ($result->num_rows > 0) {
             <!-- Spinner End -->
 
             <!-- Sidebar Start -->
-            <?php include_once ('admin_sidebar.php') ?>
+            <?php include_once('admin_sidebar.php') ?>
             <!-- Sidebar End -->
 
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <?php include_once ('admin_nav.php') ?>
+                <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
 
                 <!-- Product Inventory Table Start -->

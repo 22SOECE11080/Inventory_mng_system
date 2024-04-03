@@ -1,6 +1,19 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
+require('PHPMailer\PHPMailer.php');
+require('PHPMailer\SMTP.php');
+require('PHPMailer\Exception.php');
+
+?>
+
+<?php
 // Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['btn'])) {
     // Include your database connection file
     include 'include/conn.php';
 
@@ -8,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $r_name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $token = uniqid() . uniqid();
 
     // Check if the email already exists
     $check_sql = "SELECT * FROM retailer WHERE email = '$email'";
@@ -24,13 +38,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php
         } else {
             // Insert data into the table without hashing the password
-            $insert_sql = "INSERT INTO retailer (r_name, email, password) VALUES ('$r_name', '$email', '$password')";
+            $insert_sql = "INSERT INTO retailer (`r_name`, `email`, `password`, `token`, `status`) VALUES ('$r_name', '$email', '$password', '$token', 'Unactive')";
 
             // Execute the SQL query
             if ($conn->query($insert_sql) === TRUE) {
                 // Redirect to a success page after successful data insertion
-                header("Location: guest1.php");
-                exit();
+                
+                $mail = new PHPMailer();
+                try {
+                    // Server settings
+                    $mail->isSMTP(); // Set mailer to use SMTP
+                    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true; // Enable SMTP authentication
+                    $mail->Username = 'rnv1924@gmail.com'; // SMTP username
+                    $mail->Password = 'jypu twxl chxa bsjq'; // SMTP password
+                    $mail->SMTPSecure = 'ssl'; // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 465; // TCP port to connect to
+                    // $mail->SMTPDebug = 2;
+        
+                    // Recipients
+                    $mail->setFrom('rnv1924@gmail.com', 'RNV'); // Sender's email address and name
+                    $mail->addAddress($email, $r_name); // Recipient's email address and name
+        
+                    // Attachments
+                    //$mail->addAttachment('/path/to/attachment/file.pdf', 'Attachment.pdf'); // Path to the attachment and optional filename
+        
+                    // Content
+                    $mail->isHTML(true); // Set email format to HTML
+                    $mail->Subject = 'Account Verification';
+                    $mail->Body    = 'Congratulations! ' . $r_name . ' Your account has been created successfully. This email is for your account verification. <br> Kindly click on the link below to verify your account. You will be able to login into your account only after account verification. <br>
+                    <a href="http://localhost/Inventory_mng_system/verify_account.php?em=' . $email . '&token=' . $token . '">Click here to verify your account</a>' ;
+        
+                    // Send the email
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Email sending failed. Error: {$mail->ErrorInfo}";
+                }
             } else {
                 echo "Error inserting data: " . $conn->error;
             }
@@ -102,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $.validator.addMethod("emailregex", function(value, element) {
                 // Basic email validation regex
-                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                var regex = /^[a-zA-Z ]+$/;
                 return regex.test(value);
             }, "Please enter a valid email address");
 
@@ -196,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
                                 <span id="confirm_password_err"></span>
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                            <button type="submit" class="btn btn-primary" name="btn">Sign Up</button>
                         </form>
                     </div>
                 </div>

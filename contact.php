@@ -167,51 +167,52 @@
                 <div class="container">
                     <h1 class="text-center fs-1 fw-bold">Contact Us</h1>
                     <div class="head"></div>
-                    <p class="text-center p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    <p class="text-center p-2">The contact Form.</p>
                     <div class="row g-5" data-aos="fade-up">
                         <div class="col-sm-6">
-                            <div class="row g-3 p-3 ">
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-geo-alt-fill fs-2"></i>
-                                            <h2 class="card-title">Address</h2>
-                                            <p class="card-text">R.K University, <br> Tramba , Rajkot - 360001.
-                                            </p>
+                            <?php
+                            $sql = "SELECT * FROM contact";
+                            $result = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                // Counter to track the number of cards
+                                $cardCount = 0;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    // Increment the card count for each iteration
+                                    $cardCount++;
+
+                                    // Start a new row for every second card
+                                    if ($cardCount % 2 === 1) {
+                                        echo '<div class="row g-3 p-3">';
+                                    }
+                            ?>
+                                    <div class="col-sm-6">
+                                        <div class="card section-bg card1">
+                                            <div class="card-body">
+                                                <i class="<?= $row['icons'] ?> fs-2"></i>
+                                                <h2 class="card-title"><?= $row['title'] ?></h2>
+                                                <p class="card-text"><?= $row['content'] ?></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-telephone-fill fs-2"></i>
-                                            <h2 class="card-title">Contact Us.</h2>
-                                            <p class="card-text">+91 99999 88888 <br> +91 88888 99999</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-3 p-3" data-aos="fade-up">
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-envelope-fill fs-2"></i>
-                                            <h2 class="card-title">Email Us.</h2>
-                                            <p class="card-text">abc@rku.ac.in <br> pqr@rku.ac.in </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-clock-fill fs-2"></i>
-                                            <h2 class="card-title">Open Hours</h2>
-                                            <p class="card-text">Monday-Friday <br> 9:00 AM to 5:00 PM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                                    // Close the row for every second card
+                                    if ($cardCount % 2 === 0) {
+                                        echo '</div>'; // Close the row
+                                    }
+                                }
+
+                                // Close the row if the total cards is odd
+                                if ($cardCount % 2 === 1) {
+                                    echo '</div>'; // Close the row
+                                }
+                            } else {
+                                echo '<p class="text-center">No contact information available.</p>';
+                            }
+                            ?>
                         </div>
+
+
                         <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
                             <form class="p-5 my-5 w-100" id="form1">
                                 <div class="mb-3">

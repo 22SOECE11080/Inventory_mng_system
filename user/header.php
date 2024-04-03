@@ -1,3 +1,9 @@
+<?php
+include_once("include/conn.php");
+$url = $_SERVER['REQUEST_URI'];
+$url = parse_url($url, PHP_URL_PATH);
+$arr_url = explode("/", $url);
+?>
 <header>
     <div class="container-fluid bg-dark text-light d-flex justify-content-between align-items-center py-2">
         <!-- Logo on the left -->
@@ -13,22 +19,34 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-bold">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "index.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="about.php">About</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "about.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="about.php">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="agencies.php">Agencies</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "agencies.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="agencies.php">Agencies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="offers.php">Offers</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "offers.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="offers.php">Offers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="contact.php">Contact</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "contact.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="profile.php">Profile</a>
+                        <a class="nav-link <?php if ($arr_url[3] == "profile.php") {
+                                                        echo "active";
+                                                    } ?>" aria-current="page" href="profile.php">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#Contact">Logout<i class="bi bi-box-arrow-left"></i></a>

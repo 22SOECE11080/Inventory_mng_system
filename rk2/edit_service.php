@@ -6,32 +6,17 @@ if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
     exit(); // Ensure no further code execution after redirection
 }
 
-include 'dbcon.php';
+include_once("../include/conn.php");
 
 $username = $_SESSION['username'];
 
 $query = "SELECT * FROM admin WHERE admin_username = '$username'";
 $result = $conn->query($query);
 
-$query3 = "SELECT * FROM retailer";
-$result3 = $conn->query($query3);
 
 if ($result->num_rows > 0) {
     $userData = $result->fetch_assoc();
 
-    // Delete operation for retailer table
-    if (isset($_GET['delete_retailer']) && $_GET['delete_retailer'] != '') {
-        $retailId = $_GET['delete_retailer'];
-        $deleteQuery = "DELETE FROM retailer WHERE r_id = $retailId";
-        if ($conn->query($deleteQuery) === TRUE) {
-            echo "<script>alert('Retailer deleted successfully!');</script>";
-            // Refresh the page to reflect changes after deletion
-            echo "<script>window.location.href = 'retailers.php';</script>";
-            exit;
-        } else {
-            echo "<script>alert('Error deleting retailer: " . $conn->error . "');</script>";
-        }
-    }
 ?>
 
 
@@ -88,51 +73,68 @@ if ($result->num_rows > 0) {
                 <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
 
-
-
-                <!-- Current Start -->
-                <div class="container-fluid pt-4 px-4">
+                <div class="container-fluid pt-4">
                     <div class="bg-light text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Retailer</h6>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col">id</th>
-                                        <th scope="col">Retailer Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Edit</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    while ($row = mysqli_fetch_assoc($result3)) {
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $row['r_id']; ?></td>
-                                            <td><?php echo $row['r_name']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['password']; ?></td>
-                                            <td><?php echo $row['date']; ?></td>
-                                            <td>
-                                                <a href="retailers.php?id=<?php echo $row['r_id']; ?>" class="btn btn-primary">Edit</a>
-                                            </td>
-                                            <td>
-                                            <a href="?delete_retailer=<?php echo $row['r_id']; ?>" onclick="return confirm('Are you sure you want to delete this retailer?');" class="btn btn-danger btn-sm">Delete</a>
-                                            </td> <!-- Added Edit and Delete buttons -->
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <h2 class="mb-4">Edit Service</h2>
+                        <?php
+                        // Check if the form is submitted
+                        if (isset($_POST['update'])) {
+                            // Get the form data
+                            $service_id = $_POST['service_id'];
+                            $icon_class = $_POST['icon_class'];
+                            $heading = $_POST['heading'];
+                            $content = $_POST['content'];
+                            $link = $_POST['link'];
+
+                            // Update query
+                            $sql = "UPDATE services SET icon_class='$icon_class', heading='$heading', content='$content', link='$link' WHERE service_id='$service_id'";
+
+                            if (mysqli_query($conn, $sql)) {
+                                // Redirect to a new page after successful update
+                                header("location: success.php");
+                                exit(); // Ensure no further code execution after redirection
+                            } else {
+                                echo '<div class="alert alert-danger" role="alert">Error updating service: ' . mysqli_error($conn) . '</div>';
+                            }
+                        }
+
+                        // Fetch data for the form
+                        $service_id = $_GET['s_id'];
+                        $sql_select = "SELECT * FROM services WHERE service_id='$service_id'";
+                        $result = mysqli_query($conn, $sql_select);
+                        $row = mysqli_fetch_assoc($result);
+
+                        // Clear form values after successful submission
+                        if (isset($_GET['success']) && $_GET['success'] == 'true') {
+                            $row['icon_class'] = '';
+                            $row['heading'] = '';
+                            $row['content'] = '';
+                            $row['link'] = '';
+                        }
+                        ?>
+                        <form method="post">
+                            <!-- Your form fields -->
+                            <input type="hidden" name="service_id" value="<?php echo $row['service_id']; ?>">
+                            <div class="form-group">
+                                <label for="icon_class">Icon Class:</label>
+                                <input type="text" class="form-control" id="icon_class" name="icon_class" value="<?php echo $row['icon_class']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="heading">Heading:</label>
+                                <input type="text" class="form-control" id="heading" name="heading" value="<?php echo $row['heading']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content:</label>
+                                <textarea class="form-control" id="content" name="content"><?php echo $row['content']; ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="link">Link:</label>
+                                <input type="text" class="form-control" id="link" name="link" value="<?php echo $row['link']; ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="update">Update</button>
+                        </form>
                     </div>
                 </div>
-                <!-- Current End -->
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
