@@ -9,7 +9,7 @@ $arr_url = explode("/", $url);
         <!-- Logo on the left -->
         <a class="navbar-brand px-5 text-primary fs-2 fw-bolder" href="#">IMS</a>
         <!-- Phone number on the right -->
-        <span class="text-white me-5">Phone: 123-456-7890</span>
+        <span class="text-white me-5">Phone: +91 7984767883 </span>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-top border-light">
         <div class="container-fluid">
@@ -19,9 +19,9 @@ $arr_url = explode("/", $url);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-bold">
                     <li class="nav-item">
-                        <a class="nav-link <?php if ($arr_url[3] == "guest1.php") {
+                        <a class="nav-link <?php if ($arr_url[3] == "index.php") {
                                                         echo "active";
-                                                    } ?>" aria-current="page" href="guest1.php">Home</a>
+                                                    } ?>" aria-current="page" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php if ($arr_url[3] == "about.php") {

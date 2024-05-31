@@ -1,3 +1,6 @@
+<?php
+include_once("include/conn.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,19 +67,12 @@
             font-size: 14px;
             padding-bottom: 50px;
         }
-
-        .card:hover {
-            transform: scale(1.05);
-            /* Increase the scale to 105% on hover */
-            transition: transform 1s ease;
-            /* Add a smooth transition effect */
-        }
     </style>
 </head>
 
 <body>
-    <?php include('header.php')  ?>
-    <br>
+    <?php include('header.php');
+    include_once('include/conn.php'); ?>
     <main>
         <section>
             <div class="container bg-light">
@@ -88,10 +84,11 @@
                     if (isset($_GET['id'])) {
                         $agency_id = $_GET['id'];
 
-                        // Execute the SQL query to get products of the selected agency
-                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name
+                        // Execute the SQL query to get products of the selected agency along with offers
+                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name, agency.a_id, offer.description, offer.discount
                         FROM products
                         INNER JOIN agency ON products.a_id = agency.a_id
+                        LEFT JOIN offer ON products.p_id = offer.p_id
                         WHERE agency.a_id = $agency_id";
                         $result = mysqli_query($conn, $sql);
 
@@ -107,7 +104,24 @@
                                             <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
                                             <p class="card-text">Price: $<?php echo $row['price']; ?></p>
                                             <p class="card-text">Agency: <?php echo $row['a_name']; ?></p>
-                                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                                            <?php if (!empty($row['description'])) { ?>
+                                                <p class="card-text">Dicount: <?php echo $row['discount']; ?></p>
+                                                <p class="card-text">Offer Description: <?php echo $row['description']; ?></p>
+                                            <?php } ?>
+                                            <form method="post" action="#">
+                                                <input type="hidden" name="p_image" value="../images/<?php echo $row['p_image']; ?>">
+                                                <input type="hidden" name="p_name" value="<?php echo $row['p_name']; ?>">
+                                                <input type="hidden" name="a_name" value="<?php echo $row['a_name']; ?>">
+                                                <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                                                <input type="hidden" name="quantity" value="1"> <!-- Assuming default quantity is 1 -->
+                                                <?php if (!empty($row['discount'])) { ?>
+                                                    <input type="hidden" name="discount" value="<?php echo $row['discount']; ?>">
+                                                    <input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>"> <!-- Current date -->
+                                                <?php } ?>
+                                                <input type="hidden" name="p_id" value="<?php echo $row['p_id']; ?>">
+                                                <input type="hidden" name="a_id" value="<?php echo $agency_id; ?>"> <!-- Assuming $agency_id is available -->
+                                            </form>
+                                            <a href="singup.php"><button type="submit" class="btn btn-primary btn-sm">Add to Cart</button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -123,10 +137,9 @@
                 </div>
             </div>
         </section>
-
     </main>
 
-    <?php include('footer.php') ?>
+    <?php include('footer.php'); ?>
 
 </body>
 

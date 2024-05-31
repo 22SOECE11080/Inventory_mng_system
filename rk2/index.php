@@ -16,7 +16,10 @@ if ($result->num_rows > 0) {
     $userData = $result->fetch_assoc();
 
     // Query to get product information
-    $queryProducts = "SELECT * FROM products";
+    $queryProducts = "SELECT products.*, agency.a_name
+    FROM products
+    INNER JOIN agency ON products.a_id = agency.a_id;
+    ";
     $resultProducts = $conn->query($queryProducts);
 
     $queryProducts1 = "SELECT * FROM offer";
@@ -117,9 +120,10 @@ if ($result->num_rows > 0) {
                                     <tr class="text-dark">
                                         <th scope="col">Product ID</th>
                                         <th scope="col">Product Name</th>
+                                        <th scope="col">Agency Name</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Delete</th>
+                                        <th scope="col">Actions</th> <!-- Added Actions column header -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,9 +131,11 @@ if ($result->num_rows > 0) {
                                         <tr>
                                             <td><?php echo $product['p_id']; ?></td>
                                             <td><?php echo $product['p_name']; ?></td>
+                                            <td><?php echo $product['a_name']; ?></td>
                                             <td><?php echo $product['quantity']; ?></td>
                                             <td><?php echo $product['price']; ?></td>
                                             <td>
+                                                <a href="edit_product.php?edit_product=<?php echo $product['p_id']; ?>" class="btn btn-primary btn-sm">Edit</a> <!-- Edit button added -->
                                                 <a href="?delete_product=<?php echo $product['p_id']; ?>" onclick="return confirm('Are you sure you want to delete this product?');" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
@@ -141,7 +147,6 @@ if ($result->num_rows > 0) {
                 </div>
                 <!-- Product Inventory Table End -->
 
-
                 <!-- Offers Inventory Table Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
@@ -152,11 +157,11 @@ if ($result->num_rows > 0) {
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
                                 <thead>
                                     <tr class="text-dark">
-                                        <th scope="col">offer ID</th>
+                                        <th scope="col">Offer ID</th>
                                         <th scope="col">Offer Name</th>
-                                        <th scope="col">discount </th>
-                                        <th scope="col">Decription </th>
-                                        <th scope="col">date </th>
+                                        <th scope="col">Discount</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Date</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                 </thead>
@@ -169,6 +174,7 @@ if ($result->num_rows > 0) {
                                             <td><?php echo $offer['description']; ?></td>
                                             <td><?php echo $offer['date']; ?></td>
                                             <td>
+                                                <a href="edit_offer.php?edit_offer=<?php echo $offer['o_id']; ?>" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="?delete_offer=<?php echo $offer['o_id']; ?>" onclick="return confirm('Are you sure you want to delete this offer?');" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
@@ -179,7 +185,6 @@ if ($result->num_rows > 0) {
                     </div>
                 </div>
                 <!-- Offers Inventory Table End -->
-
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">

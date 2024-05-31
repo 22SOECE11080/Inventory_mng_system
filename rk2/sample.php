@@ -14,7 +14,7 @@ include("dbcon.php");
 $var = $_GET['id'];
 $token = uniqid() . uniqid();
 
-$q = "UPDATE `agency` SET `token` = '$token' WHERE `a_id` = '$var'";
+$q = "UPDATE `agency` SET `token` = '$token',`status`='Active' WHERE `a_id` = '$var'";
 $result1 = $conn->query($q);
 
 $sql = "SELECT * FROM `agency` WHERE `a_id` = $var";
@@ -53,7 +53,13 @@ try {
     <a href="http://localhost/Inventory_mng_system/rk2/verify_account_agency.php?em=' . $mailAddress . '&token=' . $token . '">Click here to verify your account</a>';
 
     // Send the email
-    $mail->send();
+    if($mail->send()){
+        ?>
+        <script>
+            window.location.href="http://localhost/Inventory_mng_system/rk2/agency_request.php";
+        </script>
+        <?php
+    }
     echo "Email sent successfully.";
 } catch (Exception $e) {
     echo "Email sending failed. Error: {$mail->ErrorInfo}";

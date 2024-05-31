@@ -1,3 +1,7 @@
+<?php
+include_once("../include/conn.php");
+include_once("session_login.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,7 +104,7 @@
                     em: {
                         required: true,
                         minlength: 2,
-                        maxlength: 20,
+                        maxlength: 30,
                         emregex: true
                     },
                     sub: {
@@ -112,7 +116,7 @@
                     desc: {
                         required: true,
                         minlength: 50,
-                        maxlength: 200,
+                        maxlength: 100,
                         pwregex: true
                     }
                 },
@@ -125,17 +129,17 @@
                     em: {
                         required: "Email must be required",
                         minlength: "Email must contain at least 2 characters",
-                        maxlength: "Email must contain 20 characters",
+                        maxlength: "Email must contain 15 characters",
                     },
                     sub: {
                         required: "Subject must be required",
-                        minlength: "Password must contain at least 2 characters",
-                        maxlength: "Password must contain 40 characters",
+                        minlength: "sub must contain at least 2 characters",
+                        maxlength: "sub must contain 40 characters",
                     },
                     desc: {
                         required: "Description must be required",
                         minlength: "Discription must contain at least 50 characters",
-                        maxlength: "Discription must contain 200 characters",
+                        maxlength: "Discription must contain 100 characters",
                     }
                 },
                 errorPlacement: function(error, element) {
@@ -163,79 +167,98 @@
     <br><br><br>
     <main>
         <div class="container-fluid">
-            <section id="Contact" class="p-3">
-                <div class="container">
-                    <h1 class="text-center fs-1 fw-bold">Contact Us</h1>
-                    <div class="head"></div>
-                    <p class="text-center p-2">The contact Form.</p>
-                    <div class="row g-5" data-aos="fade-up">
-                        <div class="col-sm-6">
-                            <div class="row g-3 p-3 ">
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-geo-alt-fill fs-2"></i>
-                                            <h2 class="card-title">Address</h2>
-                                            <p class="card-text">R.K University, <br> Tramba , Rajkot - 360001.
-                                            </p>
+        <section id="Contact" class="p-3">
+                    <div class="container">
+                        <h1 class="text-center fs-1 fw-bold">Contact Us</h1>
+                        <div class="head"></div>
+                        <p class="text-center p-2">The contact Form.</p>
+                        <div class="row g-5" data-aos="fade-up">
+                            <div class="col-sm-6">
+                                <?php
+                                $sql = "SELECT * FROM contact";
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    // Counter to track the number of cards
+                                    $cardCount = 0;
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        // Increment the card count for each iteration
+                                        $cardCount++;
+
+                                        // Start a new row for every second card
+                                        if ($cardCount % 2 === 1) {
+                                            echo '<div class="row g-3 p-3">';
+                                        }
+                                ?>
+                                        <div class="col-sm-6">
+                                            <div class="card section-bg card1">
+                                                <div class="card-body">
+                                                    <i class="<?= $row['icons'] ?> fs-2"></i>
+                                                    <h2 class="card-title"><?= $row['title'] ?></h2>
+                                                    <p class="card-text"><?= $row['content'] ?></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-telephone-fill fs-2"></i>
-                                            <h2 class="card-title">Contact Us.</h2>
-                                            <p class="card-text">+91 99999 88888 <br> +91 88888 99999</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                        // Close the row for every second card
+                                        if ($cardCount % 2 === 0) {
+                                            echo '</div>'; // Close the row
+                                        }
+                                    }
+
+                                    // Close the row if the total cards is odd
+                                    if ($cardCount % 2 === 1) {
+                                        echo '</div>'; // Close the row
+                                    }
+                                } else {
+                                    echo '<p class="text-center">No contact information available.</p>';
+                                }
+                                ?>
                             </div>
-                            <div class="row g-3 p-3" data-aos="fade-up">
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-envelope-fill fs-2"></i>
-                                            <h2 class="card-title">Email Us.</h2>
-                                            <p class="card-text">abc@rku.ac.in <br> pqr@rku.ac.in </p>
-                                        </div>
+                            <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
+                                <?php
+                                include_once("session_login.php");
+
+                                if (isset($_POST["send_message"])) {
+                                    $fn = $_POST['fn'];
+                                    $em = $_POST['em'];
+                                    $sub = $_POST['sub'];
+                                    $desc = $_POST['desc'];
+
+                                    $sql = "INSERT INTO user_contact (`name`, `email`, `subject`, `description`) VALUES ('$fn', '$em', '$sub', '$desc')";
+
+                                    if (mysqli_query($conn, $sql)) {
+                                        echo "Message sent successfully.";
+                                    } else {
+                                        echo "Error: " . mysqli_error($conn);
+                                    }
+                                }
+                                ?>
+
+
+                                <form class="p-5 my-5 w-100" id="form1" method="post" action="#">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
+                                        <span id="fn_err"></span>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="card section-bg card1">
-                                        <div class="card-body">
-                                            <i class="bi bi-clock-fill fs-2"></i>
-                                            <h2 class="card-title">Open Hours</h2>
-                                            <p class="card-text">Monday-Friday <br> 9:00 AM to 5:00 PM</p>
-                                        </div>
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" id="em" aria-describedby="emailHelp" name="em" placeholder="Your Email">
+                                        <span id="em_err"></span>
                                     </div>
-                                </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="sub" aria-describedby="emailHelp" name="sub" placeholder="Subject">
+                                        <span id="sub_err"></span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
+                                        <span id="desc_err"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" name="send_message">Send Message</button>
+                                </form>
                             </div>
-                        </div>
-                        <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
-                            <form class="p-5 my-5 w-100" id="form1">
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
-                                    <span id="fn_err"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="email" class="form-control" id="em" aria-describedby="emailHelp" name="em" placeholder="Your Email">
-                                    <span id="em_err"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="sub" aria-describedby="emailHelp" name="sub" placeholder="Subject">
-                                    <span id="sub_err"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
-                                    <span id="desc_err"></span>
-                                </div>
-                                <button type="submit" class="btn btn-success">Send Message</button>
-                            </form>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
     </main>
 
     <?php include('footer.php') ?>

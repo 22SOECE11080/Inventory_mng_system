@@ -77,23 +77,21 @@ if ($result->num_rows > 0) {
                     <div class="bg-light text-center rounded p-4">
                         <h2 class="mb-4">Edit About Us</h2>
                         <?php
-                        // Check if the form is submitted
                         if (isset($_POST['update'])) {
-                            // Get the form data
                             $about_id = $_POST['about_id'];
                             $title = $_POST['title'];
                             $subtitle = $_POST['subtitle'];
                             $content = $_POST['content'];
-                            $image_url = $_POST['image_url'];
+                            $image_url = '';
 
                             // Check if a new image file is uploaded
                             if ($_FILES['new_image']['error'] == 0) {
-                                $target_dir = "uploads/";
+                                $target_dir = "../images/";
                                 $target_file = $target_dir . basename($_FILES['new_image']['name']);
                                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
                                 // Check file size
-                                if ($_FILES['new_image']['size'] > 500000) {
+                                if ($_FILES['new_image']['size'] > 500000000) {
                                     echo '<div class="alert alert-danger" role="alert">Sorry, your file is too large.</div>';
                                 } else {
                                     // Upload the file
@@ -106,7 +104,11 @@ if ($result->num_rows > 0) {
                             }
 
                             // Update query
-                            $sql = "UPDATE about SET title='$title', subtitle='$subtitle', content='$content', image_url='$image_url' WHERE about_id='$about_id'";
+                            $sql = "UPDATE about SET title='$title', subtitle='$subtitle', content='$content'";
+                            if (!empty($image_url)) {
+                                $sql .= ", image_url='$image_url'";
+                            }
+                            $sql .= " WHERE about_id='$about_id'";
 
                             if (mysqli_query($conn, $sql)) {
                                 echo '<div class="alert alert-success" role="alert">About Us updated successfully!</div>';

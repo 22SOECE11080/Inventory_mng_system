@@ -1,22 +1,5 @@
 <?php
 include_once('include/conn.php');
-session_start();
-if (isset($_SESSION['success'])) {
-?>
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Success!</strong> <?php echo $_SESSION['success']; ?>
-    </div>
-<?php
-}
-if (isset($_SESSION['error'])) {
-?>
-    <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Error!</strong> <?php echo $_SESSION['error']; ?>
-    </div>
-<?php
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -123,7 +106,7 @@ if (isset($_SESSION['error'])) {
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-center mb-4">Login</h2>
-                        <form id="loginForm" method="post">
+                        <form id="loginForm" method="post" action="submit_form.php">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
@@ -134,18 +117,17 @@ if (isset($_SESSION['error'])) {
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
                                 <div id="password_err" class="invalid-feedback"></div>
                             </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                            </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
 
                         <div class="mt-3 text-center">
+                            <p>Login as Admin? <a href="http://localhost/Inventory_mng_system/user_panel/login.php">Admin Login -></a></p>
+                        </div>
+                        <div class="mt-3 text-center">
                             <p>Don't have an account? <a href="singup.php">Sign Up</a></p>
                         </div>
                         <div class="mt-3 text-center">
-                            <p><a href="forgot_password.php">Forgot Password?</a></p>
+                            <p><a href="forget_password.php">Forgot Password?</a></p>
                         </div>
                     </div>
                 </div>

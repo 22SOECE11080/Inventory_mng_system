@@ -40,13 +40,13 @@
                     <div class="card-body">
                         <h2 class="text-center mb-4">Forgot Password</h2>
                         <p class="text-center mb-4">Enter your email to reset your password.</p>
-                        <form id="forgotPasswordForm" method="post">
+                        <form id="forgotPasswordForm" method="post" action="foraget_passwrod_action.php">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email:</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter the Email" required>
                                 <div id="email_err" class="error"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary d-block mx-auto">Reset Password</button>
+                            <button type="submit" class="btn btn-primary d-block mx-auto" name="btn">Reset Password</button>
                         </form>
                     </div>
                 </div>

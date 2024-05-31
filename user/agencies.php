@@ -119,7 +119,7 @@
                     <h2 class="display-4 fw-bold lh-1 text-body-emphasis text-primary">Here we have the top agencies with us.</h2>
                     <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                        <a href="products.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" fdprocessedid="hgme3">Explore</button></a>
+                        <a href="#"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" fdprocessedid="hgme3">Explore</button></a>
                     </div>
                 </div>
                 <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg border-2 border-dark">

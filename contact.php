@@ -80,7 +80,7 @@
             }, "Email must contain specific letters");
 
             $.validator.addMethod("subregex", function(value, element) {
-                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                var regex = /^[a-zA-Z ]+$/;
                 return regex.test(value);
             });
 
@@ -212,9 +212,27 @@
                             ?>
                         </div>
 
-
                         <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
-                            <form class="p-5 my-5 w-100" id="form1">
+                            <?php
+
+                            if (isset($_POST["send_message"])) {
+                                $fn = $_POST['fn'];
+                                $em = $_POST['em'];
+                                $sub = $_POST['sub'];
+                                $desc = $_POST['desc'];
+
+                                $sql = "INSERT INTO user_contact (`name`, `email`, `subject`, `description`) VALUES ('$fn', '$em', '$sub', '$desc')";
+
+                                if (mysqli_query($conn, $sql)) {
+                                    echo "Message sent successfully.";
+                                } else {
+                                    echo "Error: " . mysqli_error($conn);
+                                }
+                            }
+                            ?>
+
+
+                            <form class="p-5 my-5 w-100" id="form1" method="post" action="#">
                                 <div class="mb-3">
                                     <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
                                     <span id="fn_err"></span>
@@ -231,7 +249,7 @@
                                     <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
                                     <span id="desc_err"></span>
                                 </div>
-                                <button type="submit" class="btn btn-success">Send Message</button>
+                                <button type="submit" class="btn btn-success" name="send_message">Send Message</button>
                             </form>
                         </div>
                     </div>

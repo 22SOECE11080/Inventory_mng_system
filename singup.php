@@ -38,7 +38,7 @@ if (isset($_POST['btn'])) {
             <?php
         } else {
             // Insert data into the table without hashing the password
-            $insert_sql = "INSERT INTO retailer (`r_name`, `email`, `password`, `token`, `status`) VALUES ('$r_name', '$email', '$password', '$token', 'Unactive')";
+            $insert_sql = "INSERT INTO retailer (`r_name`, `email`, `password`, `token`, `status`, `role`) VALUES ('$r_name', '$email', '$password', '$token', 'Unactive', 'user')";
 
             // Execute the SQL query
             if ($conn->query($insert_sql) === TRUE) {
@@ -145,7 +145,7 @@ if (isset($_POST['btn'])) {
 
             $.validator.addMethod("emailregex", function(value, element) {
                 // Basic email validation regex
-                var regex = /^[a-zA-Z ]+$/;
+                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
             }, "Please enter a valid email address");
 

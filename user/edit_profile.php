@@ -1,3 +1,7 @@
+<?php
+include_once("session_login.php");
+include_once("../include/conn.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,20 +93,13 @@
                         minlength: 6,
                         maxlength: 20
                     },
-                    email: {
-                        required: true,
-                        email: true
-                    },
                     mobile: {
                         required: true,
                         minlength: 10,
-                        maxlength: 15,
+                        maxlength: 10,
                         digits_only: true
                     },
                     address: {
-                        required: true
-                    },
-                    dob: {
                         required: true
                     },
                     gender: {
@@ -121,10 +118,6 @@
                         minlength: "Your username must consist of at least 6 characters",
                         maxlength: "Your username must not exceed 20 characters"
                     },
-                    email: {
-                        required: "Please enter your email address",
-                        email: "Please enter a valid email address"
-                    },
                     mobile: {
                         required: "Please enter your mobile number",
                         minlength: "Please enter a valid mobile number",
@@ -133,9 +126,6 @@
                     },
                     address: {
                         required: "Please enter your address"
-                    },
-                    dob: {
-                        required: "Please select your date of birth"
                     },
                     gender: {
                         required: "Please select your gender"
@@ -154,61 +144,94 @@
     <br>
     <br>
     <main>
+        <?php
+
+        $message = ''; // Variable to store success or error message
+
+        if (isset($_POST['btn'])) {
+            $fullname = $_POST['fullName'];
+            $mobile = $_POST['mobile'];
+            $address = $_POST['address'];
+            $gender = $_POST['gender'];
+            $email = $_SESSION['email'];
+            // Update query
+            $sql = "UPDATE retailer SET r_name='$fullname', mobile='$mobile', address='$address', gender='$gender' WHERE email='$email'";
+
+            if (mysqli_query($conn, $sql)) {
+                $_SESSION['update'] = "Profile updated successfully";
+            } else {
+                $message = "Error updating profile: " . mysqli_error($conn);
+            }
+
+            // Handle image upload if a new image is selected
+            if ($_FILES['pic1']['name'] != "") {
+                $pic_name = uniqid() . $_FILES['pic1']['name'];
+                $updatePicSql = "UPDATE retailer SET r_image='$pic_name' WHERE email='$email'";
+
+                if (mysqli_query($conn, $updatePicSql)) {
+                    // Move uploaded image to the desired directory
+                    move_uploaded_file($_FILES['pic1']['tmp_name'], "../images/" . $pic_name);
+                } else {
+                    $message .= " Error updating profile picture: " . mysqli_error($conn);
+                }
+            }
+        }
+
+        // Fetch user data for pre-filling the form
+        $em = $_SESSION["email"];
+        $sql = "SELECT * FROM retailer WHERE email='$em'";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+        } else {
+            $message = "No data found";
+        }
+        ?>
+
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card border-2 border-dark shadow-lg">
                         <div class="card-body">
                             <h3 class="card-title text-center">Edit Profile</h3>
-                            <div class="text-center mb-4">
-                                <img src="image1/p4.avif" style="border-radius: 50%; height:180px; width:180px;" alt="User Profile Picture">
-                            </div>
-                            <form id="profileForm" action="#" method="POST">
-                                <div class="mb-3">
-                                    <label for="fullName" class="form-label">Full Name:</label>
-                                    <input type="text" class="form-control" id="fullName" name="fullName" value="Nishant" required minlength="2" maxlength="50">
-                                    <span id="fullNameError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="userName" class="form-label">User Name:</label>
-                                    <input type="text" class="form-control" id="userName" name="userName" value="Nishant123" required minlength="6" maxlength="20">
-                                    <span id="userNameError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="Nishant@example.com" required>
-                                    <span id="emailError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="mobile" class="form-label">Mobile:</label>
-                                    <input type="tel" class="form-control" id="mobile" name="mobile" value="+1 (555) 123-4567" required pattern="[0-9]{10,15}">
-                                    <span id="mobileError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Address:</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="123 Main Street, Talala" required>
-                                    <span id="addressError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="dob" class="form-label">Date of Birth:</label>
-                                    <input type="date" class="form-control" id="dob" name="dob" value="2004-01-01" required>
-                                    <span id="dobError" class="text-danger"></span>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="gender" class="form-label">Gender:</label>
-                                    <select class="form-select" id="gender" name="gender" required>
-                                        <option selected disabled value="">Select Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Other</option>
-                                    </select>
-                                    <span id="genderError" class="text-danger"></span>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </div>
+                            <form action="edit_profile.php" method="post" enctype="multipart/form-data" id="profileForm">
+                                <div class="form-group">
+                                    <label for="fn1"><b>Fullname:</b></label>
+                                    <input type="text" class="form-control" id="fullName" placeholder="Enter Name" name="fullName" value="<?php echo $row['r_name']; ?>">
+                                    <span id="fn_err"></span>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="gen1"><b>Select Gender:</b></label>
+                                    <br>
+                                    <input type="radio" id="gender" name="gender" value="Male" <?php if ($row['gender'] == "Male") echo "checked"; ?>> Male
+                                    <input type="radio" id="gender" name="gender" value="Female" <?php if ($row['gender'] == "Female") echo "checked"; ?>> Female
+                                    <span id="gen_err"></span>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="mobile1"><b>Mobile Number:</b></label>
+                                    <input type="text" class="form-control" id="mobile" placeholder="1234567890" name="mobile" value="<?php echo $row['mobile']; ?>">
+                                    <span id="mobile_err"></span>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="email1"><b>Email:</b></label>
+                                    <input type="email" class="form-control" id="email" placeholder="example@example.com" name="email" value="<?php echo $row['email']; ?>" readonly>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="address1"><b>Address:</b></label>
+                                    <textarea class="form-control" id="address" name="address" rows="3"><?php echo $row['address']; ?></textarea>
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="address1"><b>Current Image:</b></label>
+                                    <img src="../images/<?php echo $row["r_image"]; ?>" alt="" class="img-fluid" style="height: 100px; width: auto;">
+                                </div><br>
+                                <div class="form-group">
+                                    <label for="file1"><b>Select Profile Picture:</b></label>
+                                    <input type="file" class="form-control" id="file1" name="pic1">
+                                    <span id="file2_err"></span>
+                                </div><br>
+                                <input type="submit" class="btn btn-primary" value="Submit" name="btn">
                             </form>
-
                         </div>
                     </div>
                 </div>

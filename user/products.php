@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once("include/conn.php")
 ?>
 <!DOCTYPE html>
@@ -84,10 +85,11 @@ include_once("include/conn.php")
                     if (isset($_GET['id'])) {
                         $agency_id = $_GET['id'];
 
-                        // Execute the SQL query to get products of the selected agency
-                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name
+                        // Execute the SQL query to get products of the selected agency along with offers
+                        $sql = "SELECT products.p_id, products.p_name, products.price, products.p_image, agency.a_name, agency.a_id, offer.description, offer.discount
                         FROM products
                         INNER JOIN agency ON products.a_id = agency.a_id
+                        LEFT JOIN offer ON products.p_id = offer.p_id
                         WHERE agency.a_id = $agency_id";
                         $result = mysqli_query($conn, $sql);
 
@@ -103,7 +105,25 @@ include_once("include/conn.php")
                                             <h5 class="card-title"><?php echo $row['p_name']; ?></h5>
                                             <p class="card-text">Price: $<?php echo $row['price']; ?></p>
                                             <p class="card-text">Agency: <?php echo $row['a_name']; ?></p>
-                                            <button class="btn btn-primary btn-sm">Add to Cart</button>
+                                            <?php if (!empty($row['description'])) { ?>
+                                                <p class="card-text">Dicount: <?php echo $row['discount']; ?></p>
+                                                <p class="card-text">Offer Description: <?php echo $row['description']; ?></p>
+                                            <?php } ?>
+                                            <form method="post" action="#">
+                                                <input type="hidden" name="p_image" value="../images/<?php echo $row['p_image']; ?>">
+                                                <input type="hidden" name="p_name" value="<?php echo $row['p_name']; ?>">
+                                                <input type="hidden" name="a_name" value="<?php echo $row['a_name']; ?>">
+                                                <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
+                                                <input type="hidden" name="quantity" value="1"> <!-- Assuming default quantity is 1 -->
+                                                <?php if (!empty($row['discount'])) { ?>
+                                                    <input type="hidden" name="discount" value="<?php echo $row['discount']; ?>">
+                                                    <input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>"> <!-- Current date -->
+                                                <?php } ?>
+                                                <input type="hidden" name="p_id" value="<?php echo $row['p_id']; ?>">
+                                                <input type="hidden" name="a_id" value="<?php echo $agency_id; ?>"> <!-- Assuming $agency_id is available -->
+                                                <button type="submit" class="btn btn-primary btn-sm" name="add_to_cart">Add to Cart</button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
@@ -126,3 +146,42 @@ include_once("include/conn.php")
 </body>
 
 </html>
+
+<?php
+session_start();
+
+@include 'config.php';
+
+$message = array(); // Initialize the message array
+
+if (isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['p_id'];
+    $product_img = $_POST['p_image'];
+    $product_name = $_POST['p_name'];
+    $agency_name = $_POST['a_name'];
+    $product_price = $_POST['price'];
+    $quantity = 1; // Assuming quantity is always 1 for now
+    $discount = isset($_POST['discount']) ? $_POST['discount'] : null;
+    // $date = date('Y-m-d'); // Current date
+
+    // Check if the product is already in the cart
+    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE p_id = '$product_id'");
+    if (mysqli_num_rows($select_cart) > 0) {
+        echo "<script>alert('Product is already in the cart');</script>";
+    } else {
+        // If the product is not in the cart, insert it into the cart
+        $em = $_SESSION["email"];
+        $sql1 = "SELECT * FROM retailer WHERE email='$em'";
+        $result1 = mysqli_query($conn, $sql1);
+        $row1 = mysqli_fetch_assoc($result1);
+        $r_id = $row1['r_id'];
+
+        $insert_product = mysqli_query($conn, "INSERT INTO `cart` (p_image, p_name, a_name, price, quantity, discount, p_id, r_id) VALUES ('$product_img', '$product_name', '$agency_name', '$product_price', '$quantity', '$discount', '$product_id', '$r_id')");
+        if ($insert_product) {
+            echo "<script>alert('Product added to cart successfully');</script>";
+        } else {
+            echo "<script>alert('Failed to add the product to the cart');</script>";
+        }
+    }
+}
+?>

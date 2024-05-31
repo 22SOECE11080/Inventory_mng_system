@@ -87,6 +87,64 @@ if ($result->num_rows > 0) {
                 <!-- Navbar Start -->
                 <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
+                <!-- edit carousle page -->
+                <div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Carousle</h6>
+        </div>
+        <a href="add_carousle.php" class="btn btn-success">Add Carousel Slide</a>
+        <br><br>
+                        <div class="table-responsive">
+                            <?php
+                            // SQL query to fetch data from the specified table
+                            $sql = "SELECT * FROM carousel_slides";
+
+                            // Assuming $conn is your database connection
+                            $result = mysqli_query($conn, $sql);
+
+                            // Check if there are any rows returned
+                            if (mysqli_num_rows($result) > 0) {
+                            ?>
+                                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                    <thead>
+                                        <tr class="text-dark">
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Heading</th>
+                                            <th scope="col">text</th>
+                                            <th scope="col">Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Fetch and display data row by row
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $row['id']; ?></td>
+                                                <td><img src="../images/<?php echo $row['image']; ?>" alt="Image" width="100px" height="100px" class="image-fluid"></td>
+
+                                                <td><?php echo $row['heading']; ?></td>
+                                                <td><?php echo $row['text']; ?></td>
+                                                <td>
+                                                <a href="edit_carousle.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">Edit</a>
+
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            } else {
+                                echo 'No data found.';
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Current Start -->
                 <div class="container-fluid pt-4 px-4">
@@ -231,7 +289,6 @@ if ($result->num_rows > 0) {
                                             <th scope="col">Link2</th>
                                             <th scope="col">Link3</th>
                                             <th scope="col">Link4</th>
-                                            <th scope="col">Date Added</th>
                                             <th scope="col">Edit</th>
                                         </tr>
                                     </thead>
@@ -249,7 +306,6 @@ if ($result->num_rows > 0) {
                                                 <td><?php echo $row['link2']; ?></td>
                                                 <td><?php echo $row['link3']; ?></td>
                                                 <td><?php echo $row['link4']; ?></td>
-                                                <td><?php echo $row['date_added']; ?></td>
                                                 <td>
                                                     <a href="edit_team_member.php?id=<?php echo $row['M_id']; ?>" class="btn btn-primary">Edit</a>
                                                 </td>

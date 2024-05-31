@@ -1,3 +1,6 @@
+<?php
+include_once("session_login.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +69,7 @@
         }
     </style>
 
-    <!-- for validation of forms -->
+    <!-- jQuery validation script -->
     <script>
         $(document).ready(function() {
             $.validator.addMethod("fnregex", function(value, element) {
@@ -77,17 +80,7 @@
             $.validator.addMethod("emregex", function(value, element) {
                 var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return regex.test(value);
-            }, "Email must contain specific letters");
-
-            $.validator.addMethod("subregex", function(value, element) {
-                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return regex.test(value);
-            });
-
-            $.validator.addMethod("descregex", function(value, element) {
-                var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return regex.test(value);
-            });
+            }, "Enter a valid email address");
 
             $("#form1").validate({
                 rules: {
@@ -99,21 +92,18 @@
                     },
                     em: {
                         required: true,
-                        minlength: 2,
-                        maxlength: 20,
+                        email: true,
                         emregex: true
                     },
                     sub: {
                         required: true,
                         minlength: 2,
-                        maxlength: 40,
-                        pwregex: true
+                        maxlength: 40
                     },
                     desc: {
                         required: true,
                         minlength: 50,
-                        maxlength: 200,
-                        pwregex: true
+                        maxlength: 200
                     }
                 },
                 messages: {
@@ -124,18 +114,17 @@
                     },
                     em: {
                         required: "Email must be required",
-                        minlength: "Email must contain at least 2 characters",
-                        maxlength: "Email must contain 20 characters",
+                        email: "Enter a valid email address",
                     },
                     sub: {
                         required: "Subject must be required",
-                        minlength: "Password must contain at least 2 characters",
-                        maxlength: "Password must contain 40 characters",
+                        minlength: "Subject must contain at least 2 characters",
+                        maxlength: "Subject must contain 40 characters",
                     },
                     desc: {
                         required: "Description must be required",
-                        minlength: "Discription must contain at least 50 characters",
-                        maxlength: "Discription must contain 200 characters",
+                        minlength: "Description must contain at least 50 characters",
+                        maxlength: "Description must contain 200 characters",
                     }
                 },
                 errorPlacement: function(error, element) {
@@ -163,39 +152,53 @@
     <br>
     <main>
         <div class="container-fluid">
-            <div id="Home" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item active">
-                        <img src="image1/istockphoto-1465188429-612x612.jpg" class="d-block w-100" alt="Slide 1 Image">
-                        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
-                            <div class="text-center">
-                                <h1>Heading 1</h1>
-                                <p>Text for slide 1 goes here.</p>
-                            </div>
+        <div id="Home" class="carousel slide" data-bs-ride="carousel">
+                <?php
+                // Assuming $conn is your database connection
+                include_once("../include/conn.php");
+
+                $sql = "SELECT * FROM carousel_slides";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    $active = true; // Flag for the active slide
+                ?>
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Use $active flag to set the active class for the first slide
+                                $activeClass = $active ? 'active' : '';
+                            ?>
+                                <div class="carousel-item <?php echo $activeClass; ?>">
+                                    <img src="../images/<?php echo $row['image']; ?>" class="d-block w-100">
+                                    <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+                                        <div class="text-center">
+                                            <h1><?php echo $row['heading']; ?></h1>
+                                            <p><?php echo $row['text']; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                                $active = false; // Set the active flag to false after the first slide
+                            }
+                            ?>
                         </div>
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <img src="image1/p7.webp" class="d-block w-100" alt="Slide 2 Image">
-                        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
-                            <div class="text-center">
-                                <h1>Heading 2</h1>
-                                <p>Text for slide 2 goes here.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add more slides as needed -->
-                </div>
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <?php
+                } else {
+                    echo 'No slides found.';
+                }
+                ?>
 
                 <section id="About" class="mx-auto p-2">
                     <div class="container-fluid section-bg" data-aos="fade-up">
@@ -220,7 +223,7 @@
                                 <div class="col-sm-7 x-2 border-start border-primary border-3">
                                     <h1><?= $row["title"] ?></h1>
                                     <p><?= $row["content"] ?></p>
-                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                    <a href="#"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Read More</button></a>
                                 </div>
                             </div>
                         <?php
@@ -243,7 +246,7 @@
                                 <div class="col-sm-7">
                                     <h1><?= $row["title"] ?></h1>
                                     <p><?= $row["content"] ?></p>
-                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                    <a href="#"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Read More</button></a>
                                 </div>
                                 <div class="col-sm-5 x-2 border-start border-primary border-3">
                                     <img src="../images/<?= $row["image_url"] ?>" class="d-block w-100 image-fluid" alt="image" style="border-radius: 50px;">
@@ -280,7 +283,7 @@
                                                 <i class="<?= $row['icon_class'] ?> fs-1 card1"></i>
                                                 <h3 class="card-title"><?= $row['heading'] ?></h3>
                                                 <p class="lead"><?= $row['content'] ?></p>
-                                                <a href="<?= $row['link'] ?>" class="btn btn-outline-primary btn-lg">Explore-></a>
+                                                <a href="#" class="btn btn-outline-primary btn-lg">Explore-></a>
                                             </div>
                                         </div>
                                     </div>
@@ -386,10 +389,28 @@
                                 }
                                 ?>
                             </div>
-
-
                             <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
-                                <form class="p-5 my-5 w-100" id="form1">
+                                <?php
+                                include_once("session_login.php");
+
+                                if (isset($_POST["send_message"])) {
+                                    $fn = $_POST['fn'];
+                                    $em = $_POST['em'];
+                                    $sub = $_POST['sub'];
+                                    $desc = $_POST['desc'];
+
+                                    $sql = "INSERT INTO user_contact (`name`, `email`, `subject`, `description`) VALUES ('$fn', '$em', '$sub', '$desc')";
+
+                                    if (mysqli_query($conn, $sql)) {
+                                        echo "Message sent successfully.";
+                                    } else {
+                                        echo "Error: " . mysqli_error($conn);
+                                    }
+                                }
+                                ?>
+
+
+                                <form class="p-5 my-5 w-100" id="form1" method="post" action="index.php">
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
                                         <span id="fn_err"></span>
@@ -406,7 +427,7 @@
                                         <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
                                         <span id="desc_err"></span>
                                     </div>
-                                    <button type="submit" class="btn btn-success">Send Message</button>
+                                    <button type="submit" class="btn btn-success" name="send_message">Send Message</button>
                                 </form>
                             </div>
                         </div>

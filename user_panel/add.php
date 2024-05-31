@@ -1,13 +1,5 @@
 <?php
-
-session_start();
-
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-    header("location: login.php");
-    exit;
-}
-
-include 'dbconn.php';
+include_once("session.php");
 
 $agency_username = $_SESSION['agency_username'];
 
@@ -31,16 +23,23 @@ if ($result->num_rows > 0) {
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            // Insert product data into database
-            $insertQuery = "INSERT INTO products ( p_name, a_id, price, quantity, status, p_image) VALUES ('$p_name', '$agencyId', '$price', '$quantity', '$status', '$targetFile')";
-            if ($conn->query($insertQuery) === true) {
-                echo "Product added successfully.";
-            } else {
-                echo "Error: " . $insertQuery . "<br>" . $conn->error;
-            }
+        // Check if product already exists
+        $checkQuery = "SELECT * FROM products WHERE p_name = '$p_name' AND a_id = '$agencyId'";
+        $checkResult = $conn->query($checkQuery);
+        if ($checkResult->num_rows > 0) {
+            $errorMessage = "Product with the same name already exists.";
         } else {
-            echo "Error uploading image.";
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+                // Insert product data into database
+                $insertQuery = "INSERT INTO products ( p_name, a_id, price, quantity, status, p_image) VALUES ('$p_name', '$agencyId', '$price', '$quantity', '$status', '$targetFile')";
+                if ($conn->query($insertQuery) === true) {
+                    $successMessage = "Product added successfully.";
+                } else {
+                    $errorMessage = "Error: " . $insertQuery . "<br>" . $conn->error;
+                }
+            } else {
+                $errorMessage = "Error uploading image.";
+            }
         }
     }
 
@@ -98,89 +97,23 @@ if ($result->num_rows > 0) {
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
-                    <a href="index.php" class="navbar-brand d-flex d-lg-none me-4">
-                        <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                    </a>
-                    <a href="#" class="sidebar-toggler flex-shrink-0">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                    <form class="d-none d-md-flex ms-4">
-                        <input class="form-control border-0" type="search" placeholder="Search">
-                    </form>
-                    <div class="navbar-nav align-items-center ms-auto">
-                        <div class="nav-item dropdown">
-                            <div class="dropdown-menu dropdown-menu-end  border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <div class="d-flex align-items-center">
-                                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                        <div class="ms-2">
-                                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                            <small>15 minutes ago</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all message</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Profile updated</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">New user added</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0">Password changed</h6>
-                                    <small>15 minutes ago</small>
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a href="#" class="dropdown-item text-center">See all notifications</a>
-                            </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                                <span class="d-none d-lg-inline-flex"><?php echo $userData['agency_username']; ?></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item">My Profile</a>
-                                <a href="#" class="dropdown-item">Settings</a>
-                                <a href="logout.php" class="dropdown-item">Log Out</a>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+                <?php include_once("user_panel_header.php"); ?>
                 <!-- Navbar End -->
 
                 <!-- Display Products -->
                 <div class="container-fluid pt-4 px-4">
+                    <!-- Alert Messages -->
+                    <?php if (isset($successMessage)) : ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $successMessage; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($errorMessage)) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $errorMessage; ?>
+                            </div>
+                        <?php endif; ?>
+                        <!-- End Alert Messages -->
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h6 class="mb-0">Products Belonging to <?php echo $userData['a_name']; ?></h6>

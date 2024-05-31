@@ -27,7 +27,7 @@ if ($count == 1) {
         }
 ?>
         <script>
-            window.location.href = "login.php";
+            window.location.href = "http://localhost/Inventory_mng_system/user_panel/login.php";
         </script>
 <?php
     }

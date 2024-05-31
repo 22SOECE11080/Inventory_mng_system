@@ -120,10 +120,10 @@ if ($result->num_rows > 0) {
                                             <td><?php echo $row['password']; ?></td>
                                             <td><?php echo $row['date']; ?></td>
                                             <td>
-                                                <a href="retailers.php?id=<?php echo $row['r_id']; ?>" class="btn btn-primary">Edit</a>
+                                                <a href="edit_retailer.php?id=<?php echo $row['r_id']; ?>" class="btn btn-primary">Edit</a>
                                             </td>
                                             <td>
-                                            <a href="?delete_retailer=<?php echo $row['r_id']; ?>" onclick="return confirm('Are you sure you want to delete this retailer?');" class="btn btn-danger btn-sm">Delete</a>
+                                                <a href="?delete_retailer=<?php echo $row['r_id']; ?>" onclick="return confirm('Are you sure you want to delete this retailer?');" class="btn btn-danger btn-sm">Delete</a>
                                             </td> <!-- Added Edit and Delete buttons -->
                                         </tr>
                                     <?php } ?>

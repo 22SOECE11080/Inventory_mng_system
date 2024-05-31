@@ -8,7 +8,7 @@
     <title>Document</title>
 
     <!-- aos links -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
 
     <!-- jquery links -->
     <script src="jquery/jquery-3.7.1.min.js"></script>
@@ -165,38 +165,52 @@
     <main>
         <div class="container-fluid">
             <div id="Home" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <!-- Slide 1 -->
-                    <div class="carousel-item active">
-                        <img src="images/p10.jpg" class="d-block w-100" alt="Slide 1 Image">
-                        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
-                            <div class="text-center">
-                                <h1>Heading 1</h1>
-                                <p>Text for slide 1 goes here.</p>
-                            </div>
+                <?php
+                // Assuming $conn is your database connection
+                include_once("include/conn.php");
+
+                $sql = "SELECT * FROM carousel_slides";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    $active = true; // Flag for the active slide
+                ?>
+                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Use $active flag to set the active class for the first slide
+                                $activeClass = $active ? 'active' : '';
+                            ?>
+                                <div class="carousel-item <?php echo $activeClass; ?>">
+                                    <img src="images/<?php echo $row['image']; ?>" class="d-block w-100">
+                                    <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
+                                        <div class="text-center">
+                                            <h1><?php echo $row['heading']; ?></h1>
+                                            <p><?php echo $row['text']; ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                                $active = false; // Set the active flag to false after the first slide
+                            }
+                            ?>
                         </div>
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <img src="images/p8.jpg" class="d-block w-100" alt="Slide 2 Image">
-                        <div class="carousel-caption d-flex h-100 align-items-center justify-content-center">
-                            <div class="text-center">
-                                <h1>Heading 2</h1>
-                                <p>Text for slide 2 goes here.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add more slides as needed -->
-                </div>
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <?php
+                } else {
+                    echo 'No slides found.';
+                }
+                ?>
 
                 <section id="About" class="mx-auto p-2">
                     <div class="container-fluid section-bg" data-aos="fade-up">
@@ -320,7 +334,6 @@
                                                 <h5 class="card-title"><?= $row['M_name'] ?></h5>
                                                 <p class="card-text"><?= $row['M_info'] ?></p>
                                                 <p class="socials">
-                                                    <a href="<?= $row['link1'] ?>"> <i class="bi bi-twitter text-dark mx-2 fs-4"></i></a>
                                                     <a href="<?= $row['link2'] ?>"><i class="bi bi-linkedin text-dark mx-2 fs-4"></i></a>
                                                     <a href="<?= $row['link3'] ?>"><i class="bi bi-github text-dark mx-2 fs-4"></i></a>
                                                     <a href="<?= $row['link4'] ?>"><i class="bi bi-instagram text-dark mx-2 fs-4"></i></a>
@@ -390,7 +403,26 @@
 
 
                             <div class="col-sm-6 bg-light text-center" data-aos="fade-up">
-                                <form class="p-5 my-5 w-100" id="form1">
+                                <?php
+
+                                if (isset($_POST["send_message"])) {
+                                    $fn = $_POST['fn'];
+                                    $em = $_POST['em'];
+                                    $sub = $_POST['sub'];
+                                    $desc = $_POST['desc'];
+
+                                    $sql = "INSERT INTO user_contact (`name`, `email`, `subject`, `description`) VALUES ('$fn', '$em', '$sub', '$desc')";
+
+                                    if (mysqli_query($conn, $sql)) {
+                                        echo "Message sent successfully.";
+                                    } else {
+                                        echo "Error: " . mysqli_error($conn);
+                                    }
+                                }
+                                ?>
+
+
+                                <form class="p-5 my-5 w-100" id="form1" method="post" action="#">
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="fn" aria-describedby="emailHelp" name="fn" placeholder="Your Name">
                                         <span id="fn_err"></span>
@@ -407,7 +439,7 @@
                                         <textarea class="form-control" id="desc" rows="3" name="desc" placeholder="Descepration"></textarea>
                                         <span id="desc_err"></span>
                                     </div>
-                                    <button type="submit" class="btn btn-success">Send Message</button>
+                                    <button type="submit" class="btn btn-success" name="send_message">Send Message</button>
                                 </form>
                             </div>
                         </div>

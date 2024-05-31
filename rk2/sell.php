@@ -1,63 +1,27 @@
 <?php
-
-
-
 session_start();
 
-
-
-if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true) {
-
+if (!isset($_SESSION['stulogin']) || $_SESSION['stulogin'] !== true || !isset($_SESSION['username']) || empty($_SESSION['username'])) {
     header("location: login.php");
+    exit;
 }
-
-
-
 
 include 'dbcon.php';
 
-
-
 $username = $_SESSION['username'];
-
-
-
-
-
-$query = "SELECT * FROM admin WHERE username = '$username'";
-
+$query = "SELECT * FROM admin WHERE admin_username = '$username'";
 $result = $conn->query($query);
 
-$query1 = "SELECT SUM(stock) FROM stock";
-
-$result1 = $conn->query($query1);
-
-$query2 = "SELECT SUM(qty) FROM sell";
-
-$result2 = $conn->query($query2);
-
-$query3 = "SELECT * FROM sell";
-
-$result3 = $conn->query($query3);
-
-$query4 = "SELECT * FROM stock WHERE status = 'current'";
-
-$result4 = $conn->query($query4);
-
-
 if ($result->num_rows > 0) {
-
     $userData = $result->fetch_assoc();
+    // Fetch details from the 'sell' table
+    $sellQuery = "SELECT * FROM sell";
+    $sellResult = $conn->query($sellQuery);
 
-
-
-
+}
 
 
 ?>
-
-
-
 
     <!DOCTYPE html>
     <html lang="en">
@@ -102,86 +66,71 @@ if ($result->num_rows > 0) {
             </div>
             <!-- Spinner End -->
 
-
             <!-- Sidebar Start -->
-            <?php include_once ('admin_sidebar.php') ?>
+            <?php include_once('admin_sidebar.php') ?>
             <!-- Sidebar End -->
-
 
             <!-- Content Start -->
             <div class="content">
                 <!-- Navbar Start -->
-                <?php include_once ('admin_nav.php') ?>
+                <?php include_once('admin_nav.php') ?>
                 <!-- Navbar End -->
 
-
-                <!-- Sale & Revenue Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Sell</p>
-                                    <h6 class="mb-0"><?php if ($result2->num_rows > 0) {
-
-                                                            $sellData = $result2->fetch_assoc();
-                                                            echo $sellData["SUM(qty)"];
-                                                        }
-                                                        ?></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sale & Revenue End -->
-
-
-
-
-                <!-- Recent Sales Start -->
                 <div class="container-fluid pt-4 px-4">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Recent Salse</h6>
+                            <h6 class="mb-0">Sell Table</h6>
                         </div>
                         <div class="table-responsive">
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
                                 <thead>
-                                    <tr class="text-dark">
-
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Qty</th>
-
+                                    <tr>
+                                        <th>Sell ID</th>
+                                        <th>R ID</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Email</th>
+                                        <th>Product ID</th>
+                                        <th>Product Quantity</th>
+                                        <th>Product Rate</th>
+                                        <th>Product Image</th>
+                                        <th>Date</th>
+                                        <th>Product Name</th>
+                                        <th>Address</th>
+                                        <th>Mobile</th>
+                                        <th>Agency Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($sellinfo = mysqli_fetch_assoc($result3)) {
-                                        if ($result3->num_rows > 0) {
-
-
-
+                                    if ($sellResult->num_rows > 0) {
+                                        while ($row = $sellResult->fetch_assoc()) {
                                     ?>
                                             <tr>
-
-                                                <td><?php echo $sellinfo['date']; ?></td>
-                                                <td><?php echo $sellinfo['name']; ?></td>
-                                                <td><?php echo $sellinfo['qty']; ?></td>
-
+                                                <td><?php echo $row['sell_id']; ?></td>
+                                                <td><?php echo $row['r_id']; ?></td>
+                                                <td><?php echo $row['c_name']; ?></td>
+                                                <td><?php echo $row['c_email']; ?></td>
+                                                <td><?php echo $row['p_id']; ?></td>
+                                                <td><?php echo $row['p_qty']; ?></td>
+                                                <td><?php echo $row['p_rate']; ?></td>
+                                                <td><img src="../images/<?php echo $row['p_image']; ?>" alt="Product Image" width="50" height="50"></td>
+                                                <td><?php echo $row['date']; ?></td>
+                                                <td><?php echo $row['p_name']; ?></td>
+                                                <td><?php echo $row['address']; ?></td>
+                                                <td><?php echo $row['mobile']; ?></td>
+                                                <td><?php echo $row['a_name']; ?></td>
                                             </tr>
-                                    <?php }
-                                    } ?>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='13'>No data found</td></tr>";
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <!-- Recent Sales End -->
-
-
-
 
                 <!-- Footer Start -->
                 <div class="container-fluid pt-4 px-4">
@@ -191,9 +140,7 @@ if ($result->num_rows > 0) {
                                 &copy; <a href="#">WebPartner</a>, All Right Reserved.
                             </div>
                             <div class="col-12 col-sm-6 text-center text-sm-end">
-                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                                Designed By RVN
-                                </br>
+                                Designed By RVN<br>
                                 Distributed By RVN
                             </div>
                         </div>
@@ -202,7 +149,6 @@ if ($result->num_rows > 0) {
                 <!-- Footer End -->
             </div>
             <!-- Content End -->
-
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -224,12 +170,3 @@ if ($result->num_rows > 0) {
     </body>
 
     </html>
-
-<?php
-
-} else {
-
-    echo "User data not found.";
-}
-
-?>

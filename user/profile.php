@@ -1,3 +1,6 @@
+<?php
+include_once("session_login.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,22 +83,42 @@
                     <div class="card border-2 border-dark shadow-lg">
                         <div class="card-body">
                             <h3 class="card-title text-center">User Profile</h3>
-                            <div class="text-center mb-4">
-                                <img src="image1/p4.avif" style="border-radius: 50%; height:180px; width:180px;" alt="User Profile Picture">
-                            </div>
-                            <div class="text-center">
-                                <p class="card-text"><strong>Full Name:</strong>Nishant</p>
-                                <p class="card-text"><strong>User Name:</strong> Nishant123</p>
-                                <p class="card-text"><strong>Email:</strong> Nishant@example.com</p>
-                                <p class="card-text"><strong>Mobile:</strong> +1 (555) 123-4567</p>
-                                <!-- Additional Fields -->
-                                <p class="card-text"><strong>Address:</strong> 123 Main Street, Talala.</p>
-                                <p class="card-text"><strong>Date of Birth:</strong> January 1, 2004</p>
-                                <p class="card-text"><strong>Gender:</strong> Male</p>
-                                <!-- Edit Button -->
-                                
-                                <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a>
-                            </div>
+
+                            <?php
+                            // Include database connection file
+                            include_once("../include/conn.php");
+                            $em = $_SESSION["email"];
+
+                            // Query to fetch data from the "retailers" table
+                            $sql = "SELECT * FROM retailer WHERE  email='$em'";
+                            $result = mysqli_query($conn, $sql);
+
+                            // Check if any rows were returned
+                            if ($result->num_rows > 0) {
+                                // Output data of each row
+                                while ($row = $result->fetch_assoc()) {
+                            ?>
+                                    <div class="text-center mb-4">
+                                        <!-- Include user profile picture -->
+                                        <img src='../images/<?php echo $row['r_image']; ?>' style='border-radius: 50%; height:180px; width:180px;' alt='User Profile Picture'>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class='card-text'><strong>Full Name:</strong> <?php echo $row['r_name']; ?></p>
+                                        <p class='card-text'><strong>Email:</strong> <?php echo $row['email']; ?></p>
+                                        <p class='card-text'><strong>Mobile:</strong> <?php echo $row['mobile']; ?></p>
+                                        <p class='card-text'><strong>Address:</strong> <?php echo $row['address']; ?></p>
+                                        <p class='card-text'><strong>Gender:</strong> <?php echo $row['gender']; ?></p>
+
+                                        <!-- Edit Button -->
+                                        <a href="edit_profile.php" class="btn btn-primary">Edit Profile</a><br><br>
+                                        <a href="change_password.php" class="btn btn-primary">Change  Password</a><br><br>
+                                    </div>
+                            <?php
+                                }
+                            } else {
+                                echo "No data found";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -104,7 +127,6 @@
     </main>
     <br><br>
     <?php include('footer.php') ?>
-
 </body>
 
 </html>

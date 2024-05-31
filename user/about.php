@@ -98,7 +98,7 @@
                                 <div class="col-sm-7 x-2 border-start border-primary border-3">
                                     <h1><?= $row["title"] ?></h1>
                                     <p><?= $row["content"] ?></p>
-                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                    <a href="#"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
                                 </div>
                             </div>
                         <?php
@@ -121,7 +121,7 @@
                                 <div class="col-sm-7">
                                     <h1><?= $row["title"] ?></h1>
                                     <p><?= $row["content"] ?></p>
-                                    <a href="singup.php"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
+                                    <a href="#"><button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Register</button></a>
                                 </div>
                                 <div class="col-sm-5 x-2 border-start border-primary border-3">
                                     <img src="../images/<?= $row["image_url"] ?>" class="d-block w-100 image-fluid" alt="image" style="border-radius: 50px;">
@@ -158,7 +158,7 @@
                                                 <i class="<?= $row['icon_class'] ?> fs-1 card1"></i>
                                                 <h3 class="card-title"><?= $row['heading'] ?></h3>
                                                 <p class="lead"><?= $row['content'] ?></p>
-                                                <a href="<?= $row['link'] ?>" class="btn btn-outline-primary btn-lg">Explore-></a>
+                                                <a href="#" class="btn btn-outline-primary btn-lg">Explore-></a>
                                             </div>
                                         </div>
                                     </div>
